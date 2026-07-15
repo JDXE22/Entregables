@@ -1,4 +1,19 @@
+from io import open
+
 productos = []
+
+def guardarProductosArchivo(productos):
+    with open("archivo.txt", "w") as archivo:
+        for producto in productos:
+            archivo.write(f"{producto[0]},{producto[1]},{producto[2]}\n")
+
+def leerProductosArchivo():
+
+    with open("archivo.txt", "r") as archivo:
+        for linea in archivo:
+            codigo, nombre, valor = linea.strip().split(",")
+            productos.append([int(codigo), nombre, float(valor)])
+
 
 def agregarProducto():
     codigo = int(input("Digite el codigo del producto que se añadira\n"))
@@ -10,9 +25,14 @@ def agregarProducto():
 
     productos_a_agregar = [codigo,nombre,valor]
     productos.append(productos_a_agregar)
+    guardarProductosArchivo(productos)
 
 def listarProductos():
-     print(productos)
+    for producto in productos:
+        print(f"Codigo: {producto[0]} | Nombre: {producto[1]} | Valor: {producto[2]}")
+
+
+
 
 def eliminarProducto(): 
     codigo = int(input("Digite el codigo del producto que se eliminara\n"))
@@ -21,10 +41,13 @@ def eliminarProducto():
             productos.remove(producto)
             print("Producto eliminado exitosamente")
             return
+    guardarProductosArchivo(productos)
     print("No se encontro el producto con el codigo especificado")
 
 print("Bienvenido al Gestor de Productos")
 
+if len(productos) == 0:
+    leerProductosArchivo()
 while True:
     print("Analice las opciones y escoja apropiadamente \n")
     print("\n--- MENÚ PRINCIPAL ---")
