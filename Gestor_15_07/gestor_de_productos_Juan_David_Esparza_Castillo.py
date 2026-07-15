@@ -3,7 +3,7 @@ from io import open
 productos = []
 
 def guardarProductosArchivo(productos):
-    with open("archivo.txt", "w") as archivo:
+    with open("archivo.txt", "a") as archivo:
         for producto in productos:
             archivo.write(f"{producto[0]},{producto[1]},{producto[2]}\n")
 
@@ -54,8 +54,6 @@ def eliminarProducto():
     print("No se encontro el producto con el codigo especificado")
 
 print("Bienvenido al Gestor de Productos")
-
-leerProductosArchivo()
 
 while True:
     print("Analice las opciones y escoja apropiadamente \n")
