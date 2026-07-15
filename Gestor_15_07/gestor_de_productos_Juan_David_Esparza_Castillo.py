@@ -8,7 +8,6 @@ def guardarProductosArchivo(productos):
             archivo.write(f"{producto[0]},{producto[1]},{producto[2]}\n")
 
 def leerProductosArchivo():
-
     with open("archivo.txt", "r") as archivo:
         for linea in archivo:
             codigo, nombre, valor = linea.strip().split(",")
@@ -22,17 +21,26 @@ def agregarProducto():
     while len(nombre) == 0:
         print("El nombre del producto no puede estar vacio")
         nombre = input("Digite el nombre del producto\n")
+    while valor <= 0:
+        print("El valor del producto no puede ser menor o igual a 0")
+        valor = float(input("Digite el valor del producto\n"))
+    while codigo <= 0:
+        print("El codigo del producto no puede ser menor o igual a 0")
+        codigo = int(input("Digite el codigo del producto que se añadira\n"))
 
-    productos_a_agregar = [codigo,nombre,valor]
-    productos.append(productos_a_agregar)
+    for producto in productos:
+        if producto[0] == codigo:
+            print("El codigo del producto ya existe, por favor ingrese un codigo diferente")
+            return
+    
+    productos.append(list([codigo, nombre, valor]))
     guardarProductosArchivo(productos)
 
 def listarProductos():
+    if len(productos) == 0:
+        print("No hay productos registrados, por favor agregue un producto para continuar")
     for producto in productos:
         print(f"Codigo: {producto[0]} | Nombre: {producto[1]} | Valor: {producto[2]}")
-
-
-
 
 def eliminarProducto(): 
     codigo = int(input("Digite el codigo del producto que se eliminara\n"))
@@ -40,14 +48,15 @@ def eliminarProducto():
         if producto[0] == codigo:
             productos.remove(producto)
             print("Producto eliminado exitosamente")
+            guardarProductosArchivo(productos)
             return
-    guardarProductosArchivo(productos)
+    
     print("No se encontro el producto con el codigo especificado")
 
 print("Bienvenido al Gestor de Productos")
 
-if len(productos) == 0:
-    leerProductosArchivo()
+leerProductosArchivo()
+
 while True:
     print("Analice las opciones y escoja apropiadamente \n")
     print("\n--- MENÚ PRINCIPAL ---")
