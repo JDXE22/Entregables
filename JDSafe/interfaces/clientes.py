@@ -1,4 +1,5 @@
 from io import open
+from ..helpers import funciones_txt as funciones
 def calcular_tamaño (name):
     sin_espacios=name.replace(" ","")
     tamaño=len(sin_espacios)
@@ -93,7 +94,4 @@ Cliente_Nuevo = (
        "\n\n\n"
 )
 
-with open(f"{nombre}.txt", "a+") as archivo:
-    archivo.write(Cliente_Nuevo + "\n")
-
-print(f"¡El archivo '{nombre}.txt' ha sido creado con éxito!")
+funciones.crear_archivo_txt(nombre, Cliente_Nuevo)
