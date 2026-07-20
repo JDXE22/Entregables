@@ -1,3 +1,5 @@
+from datetime import datetime
+
 print("Bienvenido a la interfaz de citas de JDSafe\n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
 print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
@@ -12,8 +14,10 @@ def agendar_cita():
     cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
     instructor = input("Seleccione el instructor con el que desea tener la clase")
     vehiculo = input("Seleccione el tipo de vehiculo")
-    fecha = input("Ingrese en formato DD/MM/YY la fecha de la cita")
-    hora = input("Ingrese en formato HH:MM la hora de la cita")
+    fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita")
+    hora_insertada = input("Ingrese en formato HH:MM la hora de la cita")
+    fecha = datetime.strptime(fecha_insertada, "%d/%m/%y").date()
+    hora = datetime.strptime(hora_insertada, "%H:%M").time()
     
     cita = {
       "cliente": cliente,
@@ -25,9 +29,10 @@ def agendar_cita():
 
     citas.append(cita)
 
-    with open("citas.txt", "w") as archivo:
+    with open("citas_clientes.txt", "w") as archivo:
       for cita in citas:
         archivo.write(f"Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']}\n")
+        print("Se ha agendado la cita correctamente \n")
 
 def consultar_citas_por_cliente(cliente):
    citas_cliente = []
@@ -58,6 +63,10 @@ while True:
     if opcion == 3:
       instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
       consultar_citas_por_instructor(instructor)
+      
+    if opcion == 0:
+      print("Saliendo de el programa, vuelva pronto... \n")
+      break
   except TypeError as e:
     print("Se ha ingresado una opcion no valido\n")
     
