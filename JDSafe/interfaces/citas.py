@@ -41,22 +41,28 @@ def consultar_citas_por_instructor(instructor):
    citas_instructor = []
    for cita in citas:
       if cita["instructor"] == instructor:
-        print(f"Se ha encontrado los siguientes resultados del instructor: {cita["instructor"]}")
+        print(f"Se ha encontrado los siguientes resultados del instructor: {cita["instructor"]} \n")
         citas_instructor.append(cita)
       return citas_instructor
 
 
 while True:
-  opcion = int(input("Ingrese la opcion: \n"))
-  if opcion == 1:
-   agendar_cita()
-  if opcion == 2:
-    cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
-    consultar_citas_por_cliente(cliente)
-      
-  if opcion == 3:
-     instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
-     consultar_citas_por_instructor(instructor)
+  try:
+    opcion = int(input("Ingrese la opcion: \n"))
+    if opcion == 1:
+      agendar_cita()
+    if opcion == 2:
+      cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
+      consultar_citas_por_cliente(cliente)
+        
+    if opcion == 3:
+      instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
+      consultar_citas_por_instructor(instructor)
+  except TypeError as e:
+    print("Se ha ingresado una opcion no valido\n")
+    
+  except Exception as e:
+    print(f"Se ha presentado un error inesperado {e}\n")
               
            
 
