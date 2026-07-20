@@ -1,23 +1,39 @@
 from datetime import datetime
+from ..helpers import funciones_txt as funciones
+
 asistencia_y_observaciones = []
 print("Bienvenido al apartado de asistencias y observaciones \n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
 
 def registrar_asistencia_y_observacion():
-  cita = input("Ingrese el codigo de la cita")
-  fecha = datetime.now().strftime("%d/%m/%Y %H:%M:%S").date()
-  for asistencia in asistencia_y_observaciones.values():
-      if asistencia["codigo"] == cita:
-        observacion = input("Inserte la observacion de la clase")
-        resultado = {f"Codigo:{cita}, Fecha:{fecha}, Observacion:{observacion}"}
-        asistencia_y_observaciones.append(resultado)
-        print("Asistencia y observacion registrada con exito")
+  cita = input("Ingrese el codigo de la cita \n")
+  existe = funciones.leer_archivo_txt("asistencias")
+  for asistencia in existe:
+    if asistencia["codigo"] == cita:
+        print("Ya existe una asistencia y observacion registrada para esta cita")
+        return
+  else:
+    fecha = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    observacion = input("Ingrese la observacion de la clase: \n" )
+    asistencia = {"codigo": cita, "fecha": fecha, "observacion": observacion}
+    asistencia_y_observaciones.append(asistencia)
+    funciones.crear_archivo_txt("asistencias",contenido=asistencia)
+    print("Asistencia y observacion registrada correctamente")
+            
         
 def consultar_asistencia_y_observacion():
   cita = input("Ingrese el codigo de la cita")
-  for asistencia in asistencia_y_observaciones:
-          if asistencia["codigo"] == cita:
-            print(asistencia_y_observaciones)
+  existe = funciones.leer_archivo_txt("asistencias")
+  if existe:
+    for asistencia in existe:
+      if asistencia["codigo"] == cita:
+        print(f"Codigo de cita: {asistencia['codigo']}")
+        print(f"Fecha: {asistencia['fecha']}")
+        print(f"Observacion: {asistencia['observacion']}")
+        return
+      else:
+        print("No se encontro una asistencia y observacion registrada para esta cita")
+      
 
 while True:
   try:
@@ -33,7 +49,7 @@ while True:
       elif opcion == 2:
         consultar_asistencia_y_observacion()
             
-      elif opcion == 3:
+      elif opcion == 0:
         print("Saliendo del apartado de asistencias y observaciones")
         break
     
@@ -42,15 +58,18 @@ while True:
   
   except KeyError:
       print("Codigo de cita no encontrado. Por favor, ingrese un codigo valido.")
+      
+  except FileNotFoundError:
+      print("No se encontraron asistencias y observaciones registradas. Por favor, registre una asistencia y observacion primero.") 
   
   except Exception as e:
       print(f"Ocurrio un error inesperado: {e}")
-    
-            
-              
-        
 
-    
+
+
+
+
+
 
 
 
