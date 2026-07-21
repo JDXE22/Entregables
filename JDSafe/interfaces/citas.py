@@ -1,4 +1,5 @@
 from datetime import datetime
+from ..helpers import funciones_txt as funciones
 
 citas = []
 
@@ -28,17 +29,21 @@ def agendar_cita():
 
 def consultar_citas_por_cliente(cliente):
    citas_cliente = []
-   for cita in citas:
+   existe = funciones.leer_archivo_txt("citas_clientes")
+   for cita in existe:
       if cita["cliente"] == cliente:
-        print(f"Se ha encontrado los siguientes resultados del cliente: {cita["cliente"]}")
+        print(f"Se ha encontrado los siguientes resultados del cliente: {cita['cliente']}")
         citas_cliente.append(cita)
       return citas_cliente
     
-def consultar_citas_por_instructor(instructor):
-   citas_instructor = []
-   for cita in citas:
-      if cita["instructor"] == instructor:
-        print(f"Se ha encontrado los siguientes resultados del instructor: {cita["instructor"]} \n")
+def consultar_citas_por_fecha():
+  fecha = input("Ingresar la fecha de la cita programada \n")
+  fecha_f = datetime.strptime(fecha, "%d/%m/%y").date()
+  citas_instructor = []
+  existe = funciones.leer_archivo_txt("citas_clientes")
+  for cita in existe:
+      if cita['fecha'] == fecha_f:
+        print(f"Se ha encontrado los siguientes resultados de la fecha: {cita['fecha']} \n")
         citas_instructor.append(cita)
       return citas_instructor
 
@@ -58,11 +63,8 @@ def menu_citas():
       if opcion == 2:
         cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
         consultar_citas_por_cliente(cliente)
-          
       if opcion == 3:
-        instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
-        consultar_citas_por_instructor(instructor)
-        
+        consultar_citas_por_fecha()        
       if opcion == 0:
         print("Saliendo de el programa, vuelva pronto... \n")
         break
