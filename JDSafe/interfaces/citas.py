@@ -1,13 +1,5 @@
 from datetime import datetime
 
-print("Bienvenido a la interfaz de citas de JDSafe\n")
-print("A continuacion se va a desplegar un menu que funciona con numeros \n")
-print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
-print("1. Programar citas ")
-print("2. Consultar citas agendadas por cliente")
-print("3. Consultar citas agendadas por fecha")
-print("Para salir del menu, ingrese 0\n")
-
 citas = []
 
 def agendar_cita():
@@ -50,29 +42,37 @@ def consultar_citas_por_instructor(instructor):
         citas_instructor.append(cita)
       return citas_instructor
 
-
-while True:
-  try:
-    opcion = int(input("Ingrese la opcion: \n"))
-    if opcion == 1:
-      agendar_cita()
-    if opcion == 2:
-      cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
-      consultar_citas_por_cliente(cliente)
+def menu_citas():
+  print("Bienvenido a la interfaz de citas de JDSafe\n")
+  print("A continuacion se va a desplegar un menu que funciona con numeros \n")
+  print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
+  print("1. Programar citas ")
+  print("2. Consultar citas agendadas por cliente")
+  print("3. Consultar citas agendadas por fecha")
+  print("Para salir del menu, ingrese 0\n")
+  while True:
+    try:
+      opcion = int(input("Ingrese la opcion: \n"))
+      if opcion == 1:
+        agendar_cita()
+      if opcion == 2:
+        cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
+        consultar_citas_por_cliente(cliente)
+          
+      if opcion == 3:
+        instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
+        consultar_citas_por_instructor(instructor)
         
-    if opcion == 3:
-      instructor = int(input("Ingresar numero de documento de 10 digitos del instructor, sin comas o espacios. \n"))
-      consultar_citas_por_instructor(instructor)
+      if opcion == 0:
+        print("Saliendo de el programa, vuelva pronto... \n")
+        break
+    except TypeError as e:
+      print("Se ha ingresado una opcion no valido\n")
       
-    if opcion == 0:
-      print("Saliendo de el programa, vuelva pronto... \n")
-      break
-  except TypeError as e:
-    print("Se ha ingresado una opcion no valido\n")
-    
-  except Exception as e:
-    print(f"Se ha presentado un error inesperado {e}\n")
-              
+    except Exception as e:
+      print(f"Se ha presentado un error inesperado {e}\n")
+
+menu_citas()   
            
 
 
