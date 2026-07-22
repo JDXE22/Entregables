@@ -1,7 +1,6 @@
 from helpers import funciones_txt as funciones
-
+lista_instructores = funciones.leer_archivo_txt("instructores")
 def creacion_instructores():
-    lista_instructores = funciones.leer_archivo_txt("instructores")
 
     print("Bienvenido al sistema de creacion de instructores")
     print("Dentro de este formulario debe ingresar los siguientes datos:")
@@ -73,39 +72,31 @@ def creacion_instructores():
                 continue  
 
             print(f"\nEspecialidad seleccionada: {sel}")
-            print("Ingrese 0 para confirmar (o cualquier otro número para cambiar):")
-            sal = int(input())
-            
-            if sal == 0:
-                print("Selección confirmada.\n")
-                break
-            else:
-                print("Confirmación cancelada. Reiniciando menú de especialidad.\n")
                 
         except ValueError as e:
             print(f"Entrada inválida. Debe ingresar un número entero: {e}\n")
 
-    nuevo_instructor = {
-        "nombre": nombre,
-        "documento": documento,
-        "especialidad": sel,
-        "disponible": True 
-    }
+        nuevo_instructor = {
+            "nombre": nombre,
+            "documento": documento,
+            "especialidad": sel,
+            "disponible": True 
+        }
 
-    lista_instructores.append(nuevo_instructor)
+        lista_instructores.append(nuevo_instructor)
 
-    instructor_Nuevo = (
-        "Registro de Instructor Nuevo \n"
-        f"Nombre: {nombre} \n"
-        f"Documento: {documento} \n"
-        f"Especialidad: {sel} \n"
-        f"Disponibilidad: {nuevo_instructor['disponible']} \n"
-        "---------------------------------------\n"
-    )
+        instructor_Nuevo = (
+            "Registro de Instructor Nuevo \n"
+            f"Nombre: {nombre} \n"
+            f"Documento: {documento} \n"
+            f"Especialidad: {sel} \n"
+            f"Disponibilidad: {nuevo_instructor['disponible']} \n"
+            "---------------------------------------\n"
+        )
 
-    funciones.crear_archivo_txt("instructores", instructor_Nuevo)
+        funciones.crear_archivo_txt("instructores", instructor_Nuevo)
 
-    print("\nLista actualizada de instructores:")
-    for instructor in lista_instructores:
-        print(f"Nombre: {instructor['nombre']}, Documento: {instructor['documento']}, Especialidad: {instructor['especialidad']}, Disponible: {instructor['disponible']}")
-        return
+        print("\nLista actualizada de instructores:")
+        for instructor in lista_instructores:
+            print(f"Nombre: {instructor['nombre']}, Documento: {instructor['documento']}, Especialidad: {instructor['especialidad']}, Disponible: {instructor['disponible']}")
+            return
