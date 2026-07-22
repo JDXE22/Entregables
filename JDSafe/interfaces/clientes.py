@@ -1,8 +1,4 @@
-from io import open
-def calcular_tamaño (name):
-    sin_espacios=name.replace(" ","")
-    tamaño=len(sin_espacios)
-    return tamaño
+from ..helpers import funciones_txt as funciones
 
 print("Bienvenido al sistema de creacion de clientes")
 print("Dentro de este formulario debe de ingresar los siguientes datos")
@@ -16,7 +12,7 @@ while True:
         sin_espacios=nombre.replace(" ","")
         validacion = sin_espacios.isalpha()
         if validacion == True:
-             resultado = calcular_tamaño(nombre)
+             resultado = funciones.calcular_tamaño(nombre)
              print(resultado)
              print(f"El nombre es valido y tiene un tamaño de {resultado}")
              if (6 <= resultado <= 50):
@@ -37,7 +33,7 @@ while True:
         sin_espacios=documento.replace(" ","")
         validacion = sin_espacios.isdigit()
         if validacion == True:
-                resultadoD = calcular_tamaño(documento)
+                resultadoD = funciones.calcular_tamaño(documento)
                 print(resultadoD)
                 print(f"El documento tiene un tamaño de {resultadoD} digitos")
 
@@ -94,7 +90,4 @@ Cliente_Nuevo = (
        "\n\n\n"
 )
 
-with open(f"{nombre}.txt", "a+") as archivo:
-    archivo.write(Cliente_Nuevo + "\n")
-
-print(f"¡El archivo '{nombre}.txt' ha sido creado con éxito!")
+funciones.crear_archivo_txt("clientes", Cliente_Nuevo)
