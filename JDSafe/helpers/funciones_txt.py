@@ -20,3 +20,8 @@ def leer_archivo_txt(nombre_archivo):
   else:
    print(f"Se han leido {len(registros)} registros del archivo '{nombre_archivo}.txt'.")
   return registros
+
+def calcular_tamaño(name):
+    sin_espacios=name.replace(" ","")
+    tamaño=len(sin_espacios)
+    return tamaño

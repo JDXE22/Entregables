@@ -1,5 +1,4 @@
 from io import open
-from ..helpers import funciones_txt as funciones
 def calcular_tamaño (name):
     sin_espacios=name.replace(" ","")
     tamaño=len(sin_espacios)
@@ -21,6 +20,7 @@ while True:
              print(resultado)
              print(f"El nombre es valido y tiene un tamaño de {resultado}")
              if (6 <= resultado <= 50):
+                    nombre.upper()
                     print(f"Bienvenido {nombre}")
                     break
              else: 
@@ -82,7 +82,7 @@ while True:
                        print("Saliendo")
                        break
                 else:
-                       print("Confirmación cancelada, Iniciando nuevamente menú")
+                       print("Confirmación cancelada, Iniciando nuevamente menú selección de curso")
         except ValueError as e:
                print(f"El dato ingresado no es valido, por lo que genera un error {e}")
 
@@ -94,4 +94,7 @@ Cliente_Nuevo = (
        "\n\n\n"
 )
 
-funciones.crear_archivo_txt(nombre, Cliente_Nuevo)
+with open(f"{nombre}.txt", "a+") as archivo:
+    archivo.write(Cliente_Nuevo + "\n")
+
+print(f"¡El archivo '{nombre}.txt' ha sido creado con éxito!")
