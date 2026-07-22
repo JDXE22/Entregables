@@ -30,6 +30,7 @@ def agendar_cita():
       }      
       funciones.crear_archivo_txt("citas_clientes", cita)
       print("Cita agendada correctamente")
+      return
 
     except ValueError:
       print("El dato ingresado no es valido, por favor ingrese un dato valido \n")
@@ -47,6 +48,7 @@ def consultar_citas_por_cliente():
         if cita['cliente'] == cliente:
           print(f"Se ha encontrado los siguientes resultados del cliente: {cita['cliente']}")
           print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
+          return
   
   except ValueError:
     print("El documento ingresado no es valido, por favor ingrese un numero de documento valido \n")
@@ -61,6 +63,7 @@ def consultar_citas_por_fecha():
         if cita['fecha'] == fecha_f:
           print(f"Se ha encontrado los siguientes resultados de la fecha: {cita['fecha']} \n")
           print(f"Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
+          return
           
   except ValueError:
     print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")

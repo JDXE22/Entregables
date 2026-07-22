@@ -1,5 +1,5 @@
 from interfaces.citas import agendar_cita, consultar_citas_por_cliente, consultar_citas_por_fecha
-from interfaces.vehiculos import creacion_de_vehiculos
+from interfaces.vehiculos import agregar_vehiculo
 from interfaces.instructores import creacion_instructores
 from interfaces.clientes import creacion_de_clientes
 from interfaces.asistencias import consultar_asistencia_y_observacion
@@ -15,8 +15,8 @@ while True:
         print("4. Registrar instructor")
         print("5. Registrar vehiculo")
         print("6. Consultar citas agendadas")
-        print("7. Consultar historial del cliente")
-        print("Ingrese 0 para terminar las votaciones y ver los resultados finales")
+        print("7. Consultar historial del cliente/vehiculos/instructor")
+        print("Ingrese 0 para salir")
         opcion = int(input("Ingrese la opcion: \n"))    
         
     except TypeError as e:
@@ -34,7 +34,7 @@ while True:
         elif opcion == 4:
                 creacion_instructores()
         elif opcion == 5:
-                creacion_de_vehiculos()
+                agregar_vehiculo()
         elif opcion == 6:
                 consultar_citas_por_fecha()
         elif opcion == 7:

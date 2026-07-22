@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..helpers import funciones_txt as funciones
+from helpers import funciones_txt as funciones
 
 def registrar_asistencia_y_observacion():
   while True:

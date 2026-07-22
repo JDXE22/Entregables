@@ -1,10 +1,10 @@
-from ..helpers import funciones_txt as funciones
+from helpers import funciones_txt as funciones
 
-print("Bienvenido al sistema de creacion de instructores")
-print("Dentro de este formulario debe de ingresar los siguientes datos")
-print("1. Primer nombre y primer apellido")
-print("2. Numero de documento")
-print("3. Seleccionar especialidad de enseñanza (Moto, carro o ambos)")
+# print("Bienvenido al sistema de creacion de instructores")
+# print("Dentro de este formulario debe de ingresar los siguientes datos")
+# print("1. Primer nombre y primer apellido")
+# print("2. Numero de documento")
+# print("3. Seleccionar especialidad de enseñanza (Moto, carro o ambos)")
 
 def creacion_instructores():
     while True:
@@ -72,24 +72,22 @@ def creacion_instructores():
                        print("No fueron ingresadas ninguna de las opciones validas")
 
                 print(f"El curso seleccionado de enseñanza fue {sel}")
-                print("Ingrese 0 para confirmar y salir de el programa")
-                sal = int(input())   
-                if sal == 0:
-                       print("Saliendo")
-                       break
-                else:
-                       print("Confirmación cancelada, Iniciando nuevamente menú de especialidad de enseñanza")
+                
+                if nombre and documento and sel:
+                 instructor_Nuevo = (
+                        f"Nombre: {nombre} \n"
+                        f"Documento: {documento} \n"
+                        f"Especialidad: {sel} \n"
+                        "-------------------------------\n\n\n"
+                        )
+
+                        
         except ValueError as e:
                print(f"El dato ingresado no es valido, por lo que genera un error {e}")
 
-        instructor_Nuevo = (
-        "Registro de instructor Nuevo \n"
-        f"Nombre: {nombre} \n"
-        f"Documento: {documento} \n"
-        f"Especialidad: {sel} \n"
-        "\n\n\n"
-        )
 
-        funciones.crear_archivo_txt("instructores", instructor_Nuevo)
+        else: 
+              funciones.crear_archivo_txt("instructores", instructor_Nuevo)
+              return
        
 

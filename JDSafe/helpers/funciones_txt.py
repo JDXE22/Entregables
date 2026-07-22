@@ -4,7 +4,7 @@ import ast
 def crear_archivo_txt(nombre_archivo, contenido):
   with open(f"data/{nombre_archivo}.txt", "a+") as archivo:
     archivo.write(str(contenido) + "\n")
-  print(f"¡El archivo '{nombre_archivo}.txt' ha sido creado con éxito!")
+  print(f"¡El archivo '{nombre_archivo}.txt' ha sido creado con éxito! \n")
 
 def leer_archivo_txt(nombre_archivo):
   try:

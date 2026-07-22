@@ -1,76 +1,99 @@
-from ..helpers import funciones_txt as funciones
+from helpers import funciones_txt as funciones
 
-print("Bienvenido al sistema de agregado de vehiculos")
-print("Dentro de este formulario debe de ingresar los siguientes datos")
-print("1. Seleccionar tipo de vehiculo (Moto o Carro)")
-print("2. Ingresar placa de el vehiculo")
+def agregar_vehiculo():
+    lista_vehiculos = funciones.leer_archivo_txt("vehiculos")
 
-def creacion_de_vehiculos(): 
+    print("Bienvenido al sistema de agregado de vehiculos")
+    print("Dentro de este formulario debe de ingresar los siguientes datos")
+    print("1. Seleccionar tipo de vehiculo (Moto o Carro)")
+    print("2. Ingresar placa de el vehiculo\n")
+
     while True:
         try:
-                print("Seleccione tipo de vehiculo \n")
-                print("1. Moto")
-                print("2. Carro")
-                opcion = int(input())
-                if opcion == 1:
-                        print("El vehiculo es Moto")
-                        sel = "Moto"
-                        
-                elif opcion == 2:
-                        print("El vehiculo es Carro")
-                        sel = "Carro"
+            print("Seleccione tipo de vehiculo")
+            print("1. Moto")
+            print("2. Carro")
+            opcion = int(input("Ingrese una opción: "))
+            
+            if opcion == 1:
+                print("El vehiculo es Moto")
+                sel = "Moto"
+            elif opcion == 2:
+                print("El vehiculo es Carro")
+                sel = "Carro"
+            else:
+                print("Opción no válida. Por favor ingrese 1 o 2.\n")
+                continue
 
-                else:
-                       print("No fueron ingresadas ninguna de las opciones validas")
+            print(f"\nEl vehiculo seleccionado para aprender fue {sel}")
+            break 
 
-                print(f"El vehiculo seleccionado para aprender fue {sel}")
-                print("Ingrese 0 para confirmar y salir de el programa")
-                sal = int(input())   
-                if sal == 0:
-                       print("Saliendo")
-                       break
-                else:
-                       print("Confirmación cancelada, Iniciando nuevamente menú de seleccion de vehiculos")
         except ValueError as e:
-               print(f"El dato ingresado no es valido, por lo que genera un error {e}")
-
+            print(f"El dato ingresado no es valido: {e}\n")
 
     while True:
-        placa = (input(f"Ingrese la placa para {sel} sin espacios ni guiones: \n")).replace(" ","").upper
-        validacion = len(placa)
-        if validacion != 6:
-             print(f"la placa debe de tener un tamaño de 6, no es valida la placa {placa} (ej. ABC123 o ABC12D).\n ")
-             print("ingrese nuevamente una placa")
-             continue
+        placa = input(f"Ingrese la placa para {sel} sin espacios ni guiones: \n").replace(" ", "").upper()
         
-        letras_placa = placa[0:3]
-        if not placa.isalpha: 
-            print("Los primeros 3 caracteres deben ser letras")
-            print("ingrese nuevamente una placa")
+        if len(placa) != 6:
+            print(f"La placa debe tener un tamaño de 6 caracteres. No es válida: {placa} (ej. ABC123 o ABC12D).\n")
             continue
+
+        letras_placa = placa[0:3]
+        if not letras_placa.isalpha(): 
+            print("Los primeros 3 caracteres deben ser letras.\n")
+            continue
+        
+        validacion = False
+        
         if sel == "Carro":
             numeros = placa[3:6]
             if numeros.isdigit():
-                print(f"Placa de Carro válida: {placa}")
-                break
+                validacion = True
             else:
                 print("Error: Los últimos 3 caracteres para un carro deben ser números (ej. ABC123).\n")
-            
+                continue
+                
         elif sel == "Moto":
             numeros = placa[3:5]
             letra_final = placa[5]
             if numeros.isdigit() and letra_final.isalpha():
-                print(f"Placa de Moto válida: {placa}")
-                break
-        else:
-            print("Error: La placa de moto debe tener 2 números y terminar en una letra (ej. ABC12D).\n")    
+                validacion = True
+            else:
+                print("Error: La placa de moto debe tener 2 números y terminar en una letra (ej. ABC12D).\n")
+                continue
 
+        if validacion:
+            existe = False
+            for v in lista_vehiculos:
+                if v["placa"] == placa:
+                    existe = True
+                    break
+                    
+            if existe:
+                print(f"Alerta: La placa {placa} ya existe en el sistema. Ingrese una diferente.\n")
+                continue  
+            else:
+                print(f"Placa de {sel} válida y disponible: {placa}")
+                break
+
+    nuevo_vehiculo = {
+        "tipo": sel,
+        "placa": placa,
+        "disponible": True
+    }
+
+    lista_vehiculos.append(nuevo_vehiculo)
 
     vehiculo_Nuevo = (
-        "Registro de vehiculo nuevo \n"
         f"Tipo de Vehiculo: {sel} \n"
         f"Placa: {placa} \n"
-        "\n\n\n"
+        f"Disponibilidad: {nuevo_vehiculo['disponible']} \n"
+        "-------------------------------------------\n"
     )
 
     funciones.crear_archivo_txt("vehiculos", vehiculo_Nuevo)
+
+    print("\nLista actualizada de vehículos:")
+    for vehiculo in lista_vehiculos:
+        print(f"Tipo: {vehiculo['tipo']}, Placa: {vehiculo['placa']}, Disponible: {vehiculo['disponible']}")
+        return
