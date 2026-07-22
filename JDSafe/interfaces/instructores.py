@@ -6,8 +6,8 @@ print("1. Primer nombre y primer apellido")
 print("2. Numero de documento")
 print("3. Seleccionar especialidad de enseñanza (Moto, carro o ambos)")
 
-
-while True:
+def creacion_instructores():
+    while True:
         nombre = (input("Ingrese su primer nombre y primer apellido: \n"))
         sin_espacios=nombre.replace(" ","")
         validacion = sin_espacios.isalpha()
@@ -28,7 +28,7 @@ while True:
 
 
 
-while True:
+    while True:
         documento = (input("Ingresar numero de documento de 10 Digitos, sin comas o espacios. \n"))
         sin_espacios=documento.replace(" ","")
         validacion = sin_espacios.isdigit()
@@ -50,7 +50,7 @@ while True:
                 print("Debe ser ingresado nuevamente.\n") 
        
 
-while True:
+    while True:
         try:
                 print("Seleccione especialidad de enseñanza \n")
                 print("1. Moto")
@@ -82,12 +82,14 @@ while True:
         except ValueError as e:
                print(f"El dato ingresado no es valido, por lo que genera un error {e}")
 
-instructor_Nuevo = (
-       "Registro de instructor Nuevo \n"
-       f"Nombre: {nombre} \n"
-       f"Documento: {documento} \n"
-       f"Especialidad: {sel} \n"
-       "\n\n\n"
-)
+        instructor_Nuevo = (
+        "Registro de instructor Nuevo \n"
+        f"Nombre: {nombre} \n"
+        f"Documento: {documento} \n"
+        f"Especialidad: {sel} \n"
+        "\n\n\n"
+        )
 
-funciones.crear_archivo_txt("data/instructores", instructor_Nuevo)
+        funciones.crear_archivo_txt("instructores", instructor_Nuevo)
+       
+
