@@ -5,7 +5,8 @@ print("Dentro de este formulario debe de ingresar los siguientes datos")
 print("1. Seleccionar tipo de vehiculo (Moto o Carro)")
 print("2. Ingresar placa de el vehiculo")
 
-while True:
+def creacion_de_vehiculos(): 
+    while True:
         try:
                 print("Seleccione tipo de vehiculo \n")
                 print("1. Moto")
@@ -34,7 +35,7 @@ while True:
                print(f"El dato ingresado no es valido, por lo que genera un error {e}")
 
 
-while True:
+    while True:
         placa = (input(f"Ingrese la placa para {sel} sin espacios ni guiones: \n")).replace(" ","").upper
         validacion = len(placa)
         if validacion != 6:
@@ -65,11 +66,11 @@ while True:
             print("Error: La placa de moto debe tener 2 números y terminar en una letra (ej. ABC12D).\n")    
 
 
-vehiculo_Nuevo = (
-       "Registro de vehiculo nuevo \n"
-       f"Tipo de Vehiculo: {sel} \n"
-       f"Placa: {placa} \n"
-       "\n\n\n"
-)
+    vehiculo_Nuevo = (
+        "Registro de vehiculo nuevo \n"
+        f"Tipo de Vehiculo: {sel} \n"
+        f"Placa: {placa} \n"
+        "\n\n\n"
+    )
 
-funciones.crear_archivo_txt("data/vehiculos", vehiculo_Nuevo)
+    funciones.crear_archivo_txt("vehiculos", vehiculo_Nuevo)
