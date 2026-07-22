@@ -7,8 +7,8 @@ def agendar_cita():
   while True:
     try:
       cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
-      instructor = input("Seleccione el instructor con el que desea tener la clase")
-      vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro")
+      instructor = input("Seleccione el instructor con el que desea tener la clase \n")
+      vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro \n")
       if vehiculo == "1":
           vehiculo = "Moto"
       elif vehiculo == "2": 
@@ -16,8 +16,8 @@ def agendar_cita():
       else: 
           print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
           return
-      fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita")
-      hora_insertada = input("Ingrese en formato HH:MM la hora de la cita")
+      fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
+      hora_insertada = input("Ingrese en formato HH:MM la hora de la cita \n")
       fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
       hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
       
