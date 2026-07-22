@@ -2,14 +2,14 @@ from io import open
 import ast
 
 def crear_archivo_txt(nombre_archivo, contenido):
-  with open(f"{nombre_archivo}.txt", "a+") as archivo:
+  with open(f"/data{nombre_archivo}.txt", "a+") as archivo:
     archivo.write(str(contenido) + "\n")
   print(f"¡El archivo '{nombre_archivo}.txt' ha sido creado con éxito!")
 
 def leer_archivo_txt(nombre_archivo):
   try:
     registros = []
-    with open(f"{nombre_archivo}.txt", "r") as archivo:
+    with open(f"data/{nombre_archivo}.txt", "r") as archivo:
       for linea in archivo: 
         linea = linea.strip()
         if linea:
