@@ -1,4 +1,8 @@
-from interfaces.citas import agendar_cita, consultar_citas_por_cliente, consultar_citas_por_fecha 
+from interfaces.citas import agendar_cita, consultar_citas_por_cliente, consultar_citas_por_fecha
+from interfaces.vehiculos import creacion_de_vehiculos
+from interfaces.instructores import creacion_instructores
+from interfaces.clientes import creacion_de_clientes
+from interfaces.asistencias import consultar_asistencia_y_observacion
 print("Bienvenido al programa JDSafe \n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
 print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
@@ -24,15 +28,15 @@ while True:
         if opcion == 1: 
             agendar_cita()
         elif opcion == 2:
-            print("Registro de asistencia y observaciones \n")
+            consultar_asistencia_y_observacion()
         elif opcion == 3:
-            print("Registro de cliente \n")
+            creacion_de_clientes()
         elif opcion == 4:
-                print("Registro de instructor \n")
+                creacion_instructores()
         elif opcion == 5:
-                print("Registro de vehiculos \n")
+                creacion_de_vehiculos()
         elif opcion == 6:
-                print("Consultar citas \n")
+                consultar_citas_por_fecha()
         elif opcion == 7:
                 consultar_citas_por_cliente()
         elif opcion == 0:
