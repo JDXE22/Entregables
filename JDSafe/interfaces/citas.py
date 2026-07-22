@@ -35,7 +35,7 @@ def agendar_cita():
                     existe = verificar_cliente(cliente)
                     if not existe:
                         print("El cliente no está registrado. Por favor, registre al cliente antes de agendar una cita.")
-                        continue
+                        return
 
                     instructor = input("Seleccione el instructor con el que desea tener la clase \n")
                     vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro \n")
@@ -45,7 +45,7 @@ def agendar_cita():
                         vehiculo = "Carro"
                     else: 
                         print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
-                        continue
+                        return
                     
                     fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                     hora_insertada = input("Ingrese en formato HH:MM la hora de la cita \n")

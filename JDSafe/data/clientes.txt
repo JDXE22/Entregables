@@ -1,0 +1,6 @@
+Registro de Cliente Nuevo
+Nombre: JUAN ESPARZA
+Documento: 1005336311
+Curso: Moto
+---------------------------------------
+

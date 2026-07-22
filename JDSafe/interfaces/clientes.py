@@ -74,34 +74,16 @@ def creacion_de_clientes():
                 continue  
 
             print(f"\nCurso seleccionado: {sel}")
-            print("Ingrese 0 para confirmar (o cualquier otro número para cambiar):")
-            sal = int(input())
-            
-            if sal == 0:
-                print("Selección confirmada.\n")
-                break
-            else:
-                print("Confirmación cancelada. Reiniciando menú de selección de curso.\n")
+            break
                 
         except ValueError as e:
             print(f"Entrada inválida. Debe ingresar un número entero: {e}\n")
 
-    nuevo_cliente = {
+    cliente_formato_txt = {
         "nombre": nombre,
         "documento": documento,
         "curso": sel
     }
-
-    lista_clientes.append(nuevo_cliente)
-
-    cliente_formato_txt = (
-        "Registro de Cliente Nuevo\n"
-        f"Nombre: {nombre}\n"
-        f"Documento: {documento}\n"
-        f"Curso: {sel}\n"
-        "---------------------------------------\n"
-    )
-
     funciones.crear_archivo_txt("clientes", cliente_formato_txt)
 
     print("\nLista actualizada de clientes:")
