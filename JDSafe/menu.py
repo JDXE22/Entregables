@@ -1,3 +1,4 @@
+from interfaces.citas import agendar_cita, consultar_citas_por_cliente, consultar_citas_por_fecha 
 print("Bienvenido al programa JDSafe \n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
 print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
@@ -21,7 +22,7 @@ while True:
 
     else:
         if opcion == 1: 
-            print("Se esta programando una cita \n")
+            agendar_cita()
         elif opcion == 2:
             print("Registro de asistencia y observaciones \n")
         elif opcion == 3:
@@ -33,7 +34,7 @@ while True:
         elif opcion == 6:
                 print("Consultar citas \n")
         elif opcion == 7:
-                print("Consultar historial del cliente \n")
+                consultar_citas_por_cliente()
         elif opcion == 0:
             print("Saliendo de el programa, vuelva pronto... \n")
             break

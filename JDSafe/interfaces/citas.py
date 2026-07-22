@@ -1,5 +1,5 @@
 from datetime import datetime
-from ..helpers import funciones_txt as funciones
+from helpers import funciones_txt as funciones
 
 citas = funciones.leer_archivo_txt("citas_clientes")
 
@@ -95,7 +95,8 @@ def menu_citas():
     except Exception as e:
       print(f"Se ha presentado un error inesperado {e}\n")
 
-menu_citas()   
+    if __name__ == "__main__":
+        menu_citas()  
            
 
 
