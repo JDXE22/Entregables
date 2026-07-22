@@ -1,7 +1,7 @@
 from datetime import datetime
 from ..helpers import funciones_txt as funciones
 
-citas = []
+citas = funciones.leer_archivo_txt("citas_clientes")
 
 def agendar_cita():
     cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
@@ -24,29 +24,27 @@ def agendar_cita():
     funciones.crear_archivo_txt("citas_clientes", cita)
 
 def consultar_citas_por_cliente():
-  cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
-  citas_cliente = []
-  existe = funciones.leer_archivo_txt("citas_clientes")
-  for cita in existe:
-      if cita['cliente'] == cliente:
-        print(f"Se ha encontrado los siguientes resultados del cliente: {cita['cliente']}")
-        print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
-        citas_cliente.append(cita)
-  return citas_cliente
+  try:
+    cliente = int(input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n"))
+    for cita in citas:
+        if cita['cliente'] == cliente:
+          print(f"Se ha encontrado los siguientes resultados del cliente: {cita['cliente']}")
+          print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
+  
+  except ValueError:
+    print("El documento ingresado no es valido, por favor ingrese un numero de documento valido \n")
+  except Exception as e:
+    print(f"Se ha presentado un error inesperado {e}\n")
     
 def consultar_citas_por_fecha():
   try:
     fecha = input("Ingresar la fecha de la cita programada \n")
     fecha_f = datetime.strptime(fecha, "%d/%m/%y").strftime("%d/%m/%y")
-    citas_instructor = []
-    existe = funciones.leer_archivo_txt("citas_clientes")
-    for cita in existe:
+    for cita in citas:
         if cita['fecha'] == fecha_f:
           print(f"Se ha encontrado los siguientes resultados de la fecha: {cita['fecha']} \n")
           print(f"Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
-          citas_instructor.append(cita)
-    return citas_instructor
-  
+          
   except ValueError:
     print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")
     
