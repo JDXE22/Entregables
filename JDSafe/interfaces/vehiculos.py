@@ -84,14 +84,7 @@ def agregar_vehiculo():
 
     lista_vehiculos.append(nuevo_vehiculo)
 
-    vehiculo_Nuevo = (
-        f"Tipo de Vehiculo: {sel} \n"
-        f"Placa: {placa} \n"
-        f"Disponibilidad: {nuevo_vehiculo['disponible']} \n"
-        "-------------------------------------------\n"
-    )
-
-    funciones.crear_archivo_txt("vehiculos", vehiculo_Nuevo)
+    funciones.crear_archivo_txt("vehiculos", nuevo_vehiculo)
 
     print("\nLista actualizada de vehículos:")
     for vehiculo in lista_vehiculos:
