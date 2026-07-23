@@ -5,6 +5,15 @@ def crear_archivo_txt(nombre_archivo, contenido):
   with open(f"data/{nombre_archivo}.txt", "a+") as archivo:
     archivo.write(str(contenido) + "\n")
   print(f"¡El archivo '{nombre_archivo}.txt' ha sido creado con éxito! \n")
+  
+def actualizar_archivo_txt(nombre_archivo, registros):
+    try:
+      with open(f"data/{nombre_archivo}.txt", "w") as archivo:
+        for linea in registros:
+          archivo.write(str(linea) + "\n")
+    except IOError:
+        print(f"Error al actualizar el archivo '{nombre_archivo}.txt'.")
+        return False
 
 def leer_archivo_txt(nombre_archivo):
   try:
@@ -17,8 +26,6 @@ def leer_archivo_txt(nombre_archivo):
   except IOError:
       print(f"Error al leer el archivo '{nombre_archivo}.txt'.")
       return []
-
-            
   except FileNotFoundError:
       print(f"El archivo '{nombre_archivo}.txt' no existe aun.")
       return []
