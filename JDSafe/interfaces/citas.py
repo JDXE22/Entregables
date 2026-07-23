@@ -69,7 +69,7 @@ def agendar_cita():
                     
                     while True:
                         try:
-                            opcion_bloque = int(input("\nSeleccione el numero del bloque de horario a agendar (1-9): "))
+                            opcion_bloque = int(input(f"\nSeleccione el numero del bloque de horario a agendar (1-{len(BLOQUES)}): "))
                             if 1 <= opcion_bloque <= len(BLOQUES):
                                 bloque_sel = BLOQUES[opcion_bloque - 1]
                                 hora_f = bloque_sel["hora"].split(" - ")[0]
