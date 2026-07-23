@@ -2,28 +2,6 @@ from datetime import datetime
 from helpers import funciones_txt as funciones
 citas = funciones.leer_archivo_txt("citas_clientes")
 
-def verificar_cliente(cliente):
-    clientes = funciones.leer_archivo_txt("clientes")
-    for registro in clientes:
-        if int(registro['documento']) == cliente:
-            return True 
-    else: 
-        return False
-
-def verificar_disponibilidad_instructor(instructor, fecha, hora):
-    for cita in citas:
-        if cita['instructor'] == instructor and cita['fecha'] == fecha and cita['hora'] == hora:
-            return False
-    else:
-        return True
-
-def verificar_disponibilidad_vehiculo(vehiculo, fecha, hora):
-    for cita in citas:
-        if cita['vehiculo'] == vehiculo and cita['fecha'] == fecha and cita['hora'] == hora:
-            return False
-    else:
-        return True
-
 def agendar_cita():
     while True:
         try:
@@ -33,7 +11,7 @@ def agendar_cita():
                 tamaño = funciones.calcular_tamaño(cliente)
                 if tamaño == 10:
                     cliente = int(cliente)
-                    existe = verificar_cliente(cliente)
+                    existe = funciones.verificar_cliente(cliente)
                     if not existe:
                         print("El cliente no está registrado. Por favor, registre al cliente antes de agendar una cita.")
                         return
@@ -53,11 +31,11 @@ def agendar_cita():
                     fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
                     hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
 
-                    if not verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
+                    if not funciones.verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
                         print(f"El instructor {instructor} no está disponible en la fecha y hora seleccionadas.")
                         continue
 
-                    if not verificar_disponibilidad_vehiculo(vehiculo, fecha_f, hora_f):
+                    if not funciones.verificar_disponibilidad_vehiculo(vehiculo, fecha_f, hora_f):
                         print(f"El vehículo {vehiculo} no está disponible en la fecha y hora seleccionadas.")
                         continue
 
