@@ -2,8 +2,6 @@ from datetime import datetime
 from helpers import funciones_txt as funciones
 from helpers import validaciones
 
-citas = funciones.leer_archivo_txt("citas_clientes")
-
 def agendar_cita():
     while True:
         try:
@@ -69,12 +67,12 @@ def agendar_cita():
             }      
             funciones.crear_archivo_txt("citas_clientes", cita)
             print("Cita agendada correctamente")
-            for cita in citas:
-                if cita['cliente'] == cliente and cita['fecha'] == fecha_f and cita['hora'] == hora_f:
-                    print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
+            print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
             return
 
 def consultar_citas_por_cliente():
+    citas = funciones.leer_archivo_txt("citas_clientes")
+
     while True:
         try:
             cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
@@ -96,6 +94,8 @@ def consultar_citas_por_cliente():
             print(f"Se ha presentado un error inesperado {e}\n")
 
 def consultar_citas_por_fecha():
+    citas = funciones.leer_archivo_txt("citas_clientes")
+
     while True:
         try:
             fecha = input("Ingresar la fecha de la cita programada (formato DD/MM/YY): \n")
