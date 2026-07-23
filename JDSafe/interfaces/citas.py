@@ -2,6 +2,18 @@ from datetime import datetime
 from helpers import funciones_txt as funciones
 from helpers import validaciones
 
+BLOQUES =[
+    {"hora": "08:00 - 09:00", "disponible": True, "estudiante": None},
+    {"hora": "09:00 - 10:00", "disponible": True, "estudiante": None},
+    {"hora": "10:00 - 11:00", "disponible": True, "estudiante": None},
+    {"hora": "11:00 - 12:00", "disponible": True, "estudiante": None},
+    {"hora": "12:00 - 13:00", "disponible": True, "estudiante": None},
+    {"hora": "13:00 - 14:00", "disponible": True, "estudiante": None},
+    {"hora": "14:00 - 15:00", "disponible": True, "estudiante": None},
+    {"hora": "15:00 - 16:00", "disponible": True, "estudiante": None},
+    {"hora": "16:00 - 17:00", "disponible": True, "estudiante": None},
+]
+
 def agendar_cita():
     while True:
         try:
@@ -31,9 +43,26 @@ def agendar_cita():
                         continue
                     
                     fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
-                    hora_insertada = input("Ingrese en formato HH:MM la hora de la cita \n")
                     fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
+                    
+                    citas_existentes = funciones.leer_archivo_txt("citas_clientes")
+                    print(f"\n--- Horarios Disponibles (8:00 AM - 5:00 PM) para el {fecha_f} ---")
+                    for bloque in BLOQUES:
+                        hora_inicio = bloque["hora"].split(" - ")[0]
+                        ocupado = False
+                        estudiante_doc = None
+                        for c in citas_existentes:
+                            if c["fecha"] == fecha_f and c["hora"] == hora_inicio:
+                                ocupado = True
+                                estudiante_doc = c["cliente"]
+                                break
+                        
+                        estado = f"RESERVADO por el estudiante con numero de documento({estudiante_doc})" if ocupado else "LIBRE"
+                        print(f"  {bloque['hora']} --> [{estado}]")
+                        
+                    hora_insertada = input("\nIngrese en formato HH:MM la hora de la cita \n")
                     hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
+
 
 
                     if not validaciones.verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
@@ -78,14 +107,14 @@ def consultar_citas_por_cliente():
             cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
             if cliente.isdigit() and len(cliente) == 10:
                 cliente = int(cliente)
-                for cita in citas:
-                    if cita['cliente'] == cliente:
-                        print(f"Se ha encontrado los siguientes resultados del cliente: {cita['cliente']}")
+                encontradas = [cita for cita in citas if cita['cliente'] == cliente]
+                if encontradas:
+                    print(f"Se han encontrado los siguientes resultados del cliente: {cliente}")
+                    for cita in encontradas:
                         print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
-                        return
                 else:
                     print("No se encontraron citas para el cliente ingresado.\n")
-                    return
+                return
             else:
                 print("El documento ingresado no es válido. Debe contener exactamente 10 dígitos.\n")
         except ValueError:
@@ -100,14 +129,14 @@ def consultar_citas_por_fecha():
         try:
             fecha = input("Ingresar la fecha de la cita programada (formato DD/MM/YY): \n")
             fecha_f = datetime.strptime(fecha, "%d/%m/%y").strftime("%d/%m/%y")
-            for cita in citas:
-                if cita['fecha'] == fecha_f:
-                    print(f"Se ha encontrado los siguientes resultados de la fecha: {cita['fecha']} \n")
+            encontradas = [cita for cita in citas if cita['fecha'] == fecha_f]
+            if encontradas:
+                print(f"Se han encontrado los siguientes resultados de la fecha: {fecha_f} \n")
+                for cita in encontradas:
                     print(f"Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
-                    return
             else:
                 print("No se encontraron citas para la fecha ingresada.\n")
-                return
+            return
         except ValueError:
             print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")
         except Exception as e:

@@ -1,4 +1,5 @@
 from helpers import funciones_txt as funciones
+from helpers import validaciones 
 
 def mostrar_horarios_disponibles():
     agenda_del_dia = funciones.leer_archivo_txt("horarios_base")
@@ -8,7 +9,7 @@ def mostrar_horarios_disponibles():
         print(f"{i}. {bloque['hora']} --> [{estado}]")
 
 def agendar_clase():
-    agenda_del_dia = funciones.leer_archivo_txt("horarios")
+    agenda_del_dia = funciones.leer_archivo_txt("horarios_base")
     mostrar_horarios_disponibles()
     try:
         opcion = int(input("\nSeleccione el número del bloque a agendar: ")) - 1
@@ -20,9 +21,20 @@ def agendar_clase():
                 print("Ese horario ya está ocupado.")
                 return None
             
-            estudiante = input("Nombre del estudiante: ").strip()
+            estudiante = input("Ingrese el número de documento del estudiante (10 dígitos): ")
+            if estudiante.isdigit() and len(estudiante) == 10:
+                estudiante = int(estudiante)
+            else:
+                print("El documento ingresado no es válido. Debe contener exactamente 10 dígitos.")
+                return None
+            existe = validaciones.verificar_cliente(estudiante)
+            if not existe:
+                print("El estudiante no está registrado. Por favor, registre al estudiante antes de agendar una clase.")
+                return None
+          
             bloque["disponible"] = False
             bloque["estudiante"] = estudiante
+            funciones.actualizar_archivo_txt("horarios_base", agenda_del_dia)
             print(f"¡Clase agendada exitosamente a las {bloque['hora']} para {estudiante}!")
             return opcion
         else:
