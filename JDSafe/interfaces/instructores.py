@@ -1,6 +1,6 @@
 from helpers import funciones_txt as funciones
-lista_instructores = funciones.leer_archivo_txt("instructores")
 def creacion_instructores():
+    lista_instructores = funciones.leer_archivo_txt("instructores")
 
     print("Bienvenido al sistema de creacion de instructores")
     print("Dentro de este formulario debe ingresar los siguientes datos:")
@@ -72,22 +72,22 @@ def creacion_instructores():
                 continue  
 
             print(f"\nEspecialidad seleccionada: {sel}")
+            break
                 
         except ValueError as e:
             print(f"Entrada inválida. Debe ingresar un número entero: {e}\n")
 
-      
-        nuevo_instructor = {
-            "nombre": nombre,
-            "documento": documento,
-            "especialidad": sel,
-            "disponible": True 
-        }
+    nuevo_instructor = {
+        "nombre": nombre,
+        "documento": documento,
+        "especialidad": sel,
+        "disponible": True 
+    }
 
-        funciones.crear_archivo_txt("instructores", nuevo_instructor)
+    funciones.crear_archivo_txt("instructores", nuevo_instructor)
 
-        print("\nLista actualizada de instructores:")
-        lista_actualizada = funciones.leer_archivo_txt("instructores")
-        for instructor in lista_actualizada:
-            print(f"Nombre: {instructor['nombre']}, Documento: {instructor['documento']}, Especialidad: {instructor['especialidad']}, Disponible: {instructor['disponible']}")
-        return
+    print("\nLista actualizada de instructores:")
+    lista_actualizada = funciones.leer_archivo_txt("instructores")
+    for instructor in lista_actualizada:
+        print(f"Nombre: {instructor['nombre']}, Documento: {instructor['documento']}, Especialidad: {instructor['especialidad']}, Disponible: {instructor['disponible']}")
+    return

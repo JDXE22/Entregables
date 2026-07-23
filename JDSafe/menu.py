@@ -2,7 +2,7 @@ from interfaces.citas import agendar_cita, consultar_citas_por_cliente, consulta
 from interfaces.vehiculos import agregar_vehiculo
 from interfaces.instructores import creacion_instructores
 from interfaces.clientes import creacion_de_clientes
-from interfaces.asistencias import consultar_asistencia_y_observacion
+from interfaces.asistencias import menu_asistencias
 from interfaces.horarios import mostrar_horarios_disponibles
 print("Bienvenido al programa JDSafe \n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
@@ -21,8 +21,10 @@ while True:
         print("Ingrese 0 para salir")
         opcion = int(input("Ingrese la opcion: \n"))    
         
+    except ValueError:
+        print("Se ha ingresado una opcion no valida. Por favor ingrese un numero entero.\n")
     except TypeError as e:
-        print("Se ha ingresado una opcion no valido\n")
+        print("Se ha ingresado una opcion no valida\n")
     except Exception as err: 
         print(f"Se ha presentado un error inesperado {err}\n")
 
@@ -30,7 +32,7 @@ while True:
         if opcion == 1: 
             agendar_cita()
         elif opcion == 2:
-            consultar_asistencia_y_observacion()
+            menu_asistencias()
         elif opcion == 3:
             creacion_de_clientes()
         elif opcion == 4:

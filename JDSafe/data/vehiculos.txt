@@ -1,1 +1,0 @@
-{'tipo': 'Moto', 'placa': 'ABC12D', 'disponible': True}

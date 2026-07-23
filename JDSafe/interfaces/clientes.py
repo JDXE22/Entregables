@@ -87,5 +87,6 @@ def creacion_de_clientes():
     funciones.crear_archivo_txt("clientes", cliente_formato_txt)
 
     print("\nLista actualizada de clientes:")
-    for cliente in lista_clientes:
+    lista_actualizada = funciones.leer_archivo_txt("clientes")
+    for cliente in lista_actualizada:
         print(f"Nombre: {cliente['nombre']}, Documento: {cliente['documento']}, Curso: {cliente['curso']}")

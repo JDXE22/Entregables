@@ -56,6 +56,7 @@ def agendar_cita():
                         except ValueError:
                             print("Entrada invalida. Por favor, ingrese un numero entero.\n")
                             
+                    while True:
                         try:
                             fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                             fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
