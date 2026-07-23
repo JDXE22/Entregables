@@ -28,11 +28,12 @@ def verificar_disponibilidad_cita(fecha,hora):
             return False
     return True
 
-def verificar_especialidad_instructor(instructor, tipo_vehiculo):
+def verificar_especialidad_instructor(instructor_nombre, tipo_vehiculo):
     instructores = funciones.leer_archivo_txt("instructores")
-    for instructor in instructores:
-        if instructor['nombre'] == instructor:
-            especialidad = instructor['especialidad']
+    nombre_upper = instructor_nombre.strip().upper()
+    for inst in instructores:
+        if inst['nombre'].upper() == nombre_upper:
+            especialidad = inst['especialidad']
             if tipo_vehiculo == "Moto" and especialidad in ["Moto", "Ambos (Carro y Moto)"]:
                 return True
             elif tipo_vehiculo == "Carro" and especialidad in ["Carro", "Ambos (Carro y Moto)"]:
