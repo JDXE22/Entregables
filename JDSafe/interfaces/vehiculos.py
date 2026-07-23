@@ -5,7 +5,7 @@ def agregar_vehiculo():
 
     print("Bienvenido al sistema de agregado de vehiculos")
     print("Dentro de este formulario debe de ingresar los siguientes datos")
-    print("1. Seleccionar tipo de vehiculo (Moto o Carro)")
+    print("1. Seleccionar tipo de vehiculo (Moto o Carro) \n")
     print("2. Ingresar placa de el vehiculo\n")
 
     while True:
@@ -13,7 +13,7 @@ def agregar_vehiculo():
             print("Seleccione tipo de vehiculo")
             print("1. Moto")
             print("2. Carro")
-            opcion = int(input("Ingrese una opción: "))
+            opcion = int(input("Ingrese una opción: \n"))
             
             if opcion == 1:
                 print("El vehiculo es Moto")
