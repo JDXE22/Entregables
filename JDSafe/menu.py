@@ -24,7 +24,7 @@ while True:
     except ValueError:
         print("Se ha ingresado una opcion no valida. Por favor ingrese un numero entero.\n")
     except TypeError as e:
-        print("Se ha ingresado una opcion no valida\n")
+        print("Se ha ingresado una opcion no valida {e}\n")
     except Exception as err: 
         print(f"Se ha presentado un error inesperado {err}\n")
 
