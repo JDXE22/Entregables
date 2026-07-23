@@ -17,21 +17,45 @@ def agendar_cita():
                         print("El cliente no está registrado. Por favor, registre al cliente antes de agendar una cita.")
                         return
 
-                    instructor = input("Seleccione el instructor con el que desea tener la clase \n")
-                    vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro \n")
-                    if vehiculo == "1":
-                        vehiculo = "Moto"
-                    elif vehiculo == "2": 
-                        vehiculo = "Carro"
-                    else: 
-                        print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
+                    while True:
+                        vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro \n")
+                        if vehiculo == "1":
+                            vehiculo = "Moto"
+                            break
+                        elif vehiculo == "2": 
+                            vehiculo = "Carro"
+                            break
+                        else: 
+                            print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
+
+                    instructores_registrados = funciones.leer_archivo_txt("instructores")
+                    instructores_filtrados = []
+                    for inst in instructores_registrados:
+                        especialidad = inst["especialidad"]
+                        if vehiculo == "Moto" and especialidad in ["Moto", "Ambos (Carro y Moto)"]:
+                            instructores_filtrados.append(inst)
+                        elif vehiculo == "Carro" and especialidad in ["Carro", "Ambos (Carro y Moto)"]:
+                            instructores_filtrados.append(inst)
+
+                    if not instructores_filtrados:
+                        print(f"No hay instructores registrados o disponibles para enseñar {vehiculo}. Por favor registre un instructor primero.")
                         return
 
-                    if not validaciones.verificar_especialidad_instructor(instructor, vehiculo):
-                        print(f"El instructor {instructor} no tiene especialidad para enseñar a manejar {vehiculo}. Seleccione otro instructor.")
-                        continue
-                    
+                    print(f"\n--- Instructores Disponibles para {vehiculo} ---")
+                    for i, inst in enumerate(instructores_filtrados, start=1):
+                        print(f"  {i}. {inst['nombre']} (Especialidad: {inst['especialidad']})")
+
                     while True:
+                        try:
+                            opcion_inst = int(input(f"\nSeleccione el numero del instructor (1-{len(instructores_filtrados)}): "))
+                            if 1 <= opcion_inst <= len(instructores_filtrados):
+                                instructor = instructores_filtrados[opcion_inst - 1]["nombre"]
+                                break
+                            else:
+                                print(f"Opcion invalida. Debe ser un numero entre 1 y {len(instructores_filtrados)}.\n")
+                        except ValueError:
+                            print("Entrada invalida. Por favor, ingrese un numero entero.\n")
+                            
                         try:
                             fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                             fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
