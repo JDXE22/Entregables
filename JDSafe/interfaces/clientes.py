@@ -32,7 +32,7 @@ def creacion_de_clientes():
         
         if sin_espacios.isdigit():
             tamano_doc = funciones.calcular_tamaño(documento)
-            
+            #6 <= tamano_doc 10:
             if tamano_doc == 10:
                 existe = False
                 for cliente in lista_clientes:
@@ -48,7 +48,7 @@ def creacion_de_clientes():
                 print(f"Documento válido: {documento}\n")
                 break
             else:
-                print(f"El documento solo contiene números, pero su longitud ({tamano_doc}) no es de 10 dígitos.")
+                print(f"El documento solo contiene números, pero su longitud ({tamano_doc}) no esta en el rango de 6 a 10 dígitos.")
                 print("Intente de nuevo.\n")
         else:
             print("El documento ingresado no es válido. No debe contener letras ni símbolos.")
