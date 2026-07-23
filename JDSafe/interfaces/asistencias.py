@@ -21,7 +21,7 @@ def registrar_asistencia_y_observacion():
             print(f"Ya existe una asistencia y observacion registrada para la cita {codigo}")
             return
     
-    observacion = input("Ingrese la observacion de la asistencia: \n")
+    observacion = input("Ingrese la observacion de la asistencia: \n").upper()
     fecha_str = cita_existente["fecha"]
 
     asistencia = {"codigo": codigo, "fecha": fecha_str, "observacion": observacion}
