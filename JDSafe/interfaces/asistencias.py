@@ -86,7 +86,6 @@ def menu_asistencias():
                 print("Saliendo del menu de asistencias y observaciones... \n")
                 break
               
-menu_asistencias()
 
 
 
