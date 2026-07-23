@@ -1,7 +1,7 @@
 from datetime import datetime
 from helpers import funciones_txt as funciones
 from helpers import validaciones
-from interfaces.horarios import mostrar_horarios_disponibles
+from interfaces.horarios import mostrar_horarios_disponibles, BLOQUES
 
 def agendar_cita():
     while True:
@@ -31,13 +31,27 @@ def agendar_cita():
                         print(f"El instructor {instructor} no tiene especialidad para enseñar a manejar {vehiculo}. Seleccione otro instructor.")
                         continue
                     
-                    fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
-                    fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
+                    while True:
+                        try:
+                            fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
+                            fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
+                            break
+                        except ValueError:
+                            print("El formato de la fecha ingresada no es valido. Por favor use el formato DD/MM/YY (ej. 24/07/26).\n")
                     
                     mostrar_horarios_disponibles(fecha_f)
-                        
-                    hora_insertada = input("\nIngrese en formato HH:MM la hora de la cita \n")
-                    hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
+                    
+                    while True:
+                        try:
+                            opcion_bloque = int(input("\nSeleccione el numero del bloque de horario a agendar (1-9): "))
+                            if 1 <= opcion_bloque <= len(BLOQUES):
+                                bloque_sel = BLOQUES[opcion_bloque - 1]
+                                hora_f = bloque_sel["hora"].split(" - ")[0]
+                                break
+                            else:
+                                print(f"Opcion invalida. Debe ser un numero entre 1 y {len(BLOQUES)}.\n")
+                        except ValueError:
+                            print("Entrada invalida. Por favor, ingrese un numero entero.\n")
 
                     if not validaciones.verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
                         print(f"El instructor {instructor} no está disponible en la fecha y hora seleccionadas.")
@@ -45,6 +59,9 @@ def agendar_cita():
 
                     if not validaciones.verificar_disponibilidad_vehiculo(vehiculo, fecha_f, hora_f):
                         print(f"El vehículo {vehiculo} no está disponible en la fecha y hora seleccionadas.")
+                        continue
+                    if not validaciones.verificar_disponibilidad_cita(fecha_f, hora_f):
+                        print(f"Ya existe una cita programada en la fecha {fecha_f} y hora {hora_f}. Por favor, seleccione otra fecha y hora.")
                         continue
 
                 else:
