@@ -1,32 +1,33 @@
 from datetime import datetime
 from helpers import funciones_txt as funciones
-import random
 
 def registrar_asistencia_y_observacion():
     while True:
         try:
-            cita = random.randint(100, 999)
-            existe = funciones.leer_archivo_txt("asistencias")
-            for asistencia in existe:
-                if asistencia["codigo"] == cita:
-                    print("Ya existe una asistencia y observacion registrada para esta cita")
-                    return
-            
-            fecha_insertada = input("Ingresar la fecha de la cita programada (formato DD/MM/YY): \n")
-            observacion = input("Ingrese la observacion de la asistencia: \n")
-            fecha = datetime.strptime(fecha_insertada, "%d/%m/%y")
-            fecha_str = fecha.strftime("%d/%m/%y")
+            codigo = int(input("Ingrese el codigo de la cita (numero de 3 digitos): \n"))
             break
         except ValueError:
-            print("El formato de fecha ingresado no es valido, por favor intente de nuevo.\n")
-        except Exception as e:
-            print(f"Se ha presentado un error inesperado: {e}\n")
-            return
+            print("El dato ingresado no es valido. Por favor ingrese un numero de cita de 3 digitos.\n")
 
-    asistencia = {"codigo": cita, "fecha": fecha_str, "observacion": observacion}
+    citas = funciones.leer_archivo_txt("citas_clientes")
+    cita_existente = next((c for c in citas if c.get("codigo") == codigo), None)
+    if not cita_existente:
+        print(f"No se encontro ninguna cita programada con el codigo {codigo}. Por favor verifique el codigo.")
+        return
+
+    existe = funciones.leer_archivo_txt("asistencias")
+    for a in existe:
+        if a["codigo"] == codigo:
+            print(f"Ya existe una asistencia y observacion registrada para la cita {codigo}")
+            return
+    
+    observacion = input("Ingrese la observacion de la asistencia: \n")
+    fecha_str = cita_existente["fecha"]
+
+    asistencia = {"codigo": codigo, "fecha": fecha_str, "observacion": observacion}
     funciones.crear_archivo_txt("asistencias", contenido=asistencia)
     print("Asistencia y observacion registrada correctamente")
-    print(f"Codigo de cita: {cita}")
+    print(f"Codigo de cita: {codigo}")
     print(f"Fecha: {fecha_str}")
     print(f"Observacion: {observacion}")
 

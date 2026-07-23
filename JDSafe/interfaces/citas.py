@@ -1,4 +1,5 @@
 from datetime import datetime
+import random
 from helpers import funciones_txt as funciones
 from helpers import validaciones
 from interfaces.horarios import mostrar_horarios_disponibles, BLOQUES
@@ -103,7 +104,10 @@ def agendar_cita():
         except Exception as e:
             print(f"Se ha presentado un error inesperado {e}\n")
         else: 
+            codigo = random.randint(100, 999)
+
             cita = {
+                "codigo": codigo,
                 "cliente": cliente,
                 "instructor": instructor,
                 "vehiculo": vehiculo,
@@ -112,6 +116,7 @@ def agendar_cita():
             }      
             funciones.crear_archivo_txt("citas_clientes", cita)
             print("Cita agendada correctamente")
+            print(f"Codigo de cita: {codigo}")
             print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
             return
 
@@ -127,7 +132,7 @@ def consultar_citas_por_cliente():
                 if encontradas:
                     print(f"Se han encontrado los siguientes resultados del cliente: {cliente}")
                     for cita in encontradas:
-                        print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
+                        print(f"Codigo: {cita.get('codigo', 'N/A')}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
                 else:
                     print("No se encontraron citas para el cliente ingresado.\n")
                 return
@@ -149,7 +154,7 @@ def consultar_citas_por_fecha():
             if encontradas:
                 print(f"Se han encontrado los siguientes resultados de la fecha: {fecha_f} \n")
                 for cita in encontradas:
-                    print(f"Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
+                    print(f"Codigo: {cita.get('codigo', 'N/A')}, Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
             else:
                 print("No se encontraron citas para la fecha ingresada.\n")
             return
