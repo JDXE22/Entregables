@@ -20,3 +20,18 @@ def verificar_disponibilidad_vehiculo(vehiculo, fecha, hora):
         if cita['vehiculo'] == vehiculo and cita['fecha'] == fecha and cita['hora'] == hora:
             return False
     return True
+
+def verificar_disponibilidad_cita(fecha,hora):
+    citas = funciones.leer_archivo_txt("citas_clientes")
+    for cita in citas:
+        if cita['fecha'] == fecha and cita['hora'] == hora:
+            return False
+    return True
+
+def verificar_especialidad_instructor(especialidad):
+    instructores = funciones.leer_archivo_txt("instructores")
+    for instructor in instructores:
+        if instructor['especialidad'] ==  especialidad:
+            return False
+    return True 
+    
