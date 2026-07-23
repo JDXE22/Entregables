@@ -64,6 +64,9 @@ def agendar_cita():
             }      
             funciones.crear_archivo_txt("citas_clientes", cita)
             print("Cita agendada correctamente")
+            for cita in citas:
+                if cita['cliente'] == cliente and cita['fecha'] == fecha_f and cita['hora'] == hora_f:
+                    print(f"Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Fecha: {cita['fecha']}, Hora: {cita['hora']} \n")
             return
 
 def consultar_citas_por_cliente():
