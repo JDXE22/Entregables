@@ -7,20 +7,22 @@ def verificar_cliente(cliente):
     for registro in clientes:
         if int(registro['documento']) == cliente:
             return True 
-        else: 
-            return False
+    else: 
+        return False
 
 def verificar_disponibilidad_instructor(instructor, fecha, hora):
     for cita in citas:
         if cita['instructor'] == instructor and cita['fecha'] == fecha and cita['hora'] == hora:
             return False
-    return True
+    else:
+        return True
 
 def verificar_disponibilidad_vehiculo(vehiculo, fecha, hora):
     for cita in citas:
         if cita['vehiculo'] == vehiculo and cita['fecha'] == fecha and cita['hora'] == hora:
             return False
-    return True
+    else:
+        return True
 
 def agendar_cita():
     while True:
