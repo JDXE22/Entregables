@@ -61,6 +61,11 @@ def agendar_cita():
                         try:
                             fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                             fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
+                            fecha_actual = datetime.now().strftime("%d/%m/%y")
+                            
+                            if datetime.strptime(fecha_f, "%d/%m/%y" < datetime.strptime(fecha_actual), "%d/%m/%y"):
+                                print("La fecha ingresada ya ha pasado. Por favor, ingrese una fecha futura.\n")
+                                continue
                             break
                         except ValueError:
                             print("El formato de la fecha ingresada no es valido. Por favor use el formato DD/MM/YY (ej. 24/07/26).\n")
