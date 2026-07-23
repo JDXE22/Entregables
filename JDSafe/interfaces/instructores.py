@@ -31,8 +31,7 @@ def creacion_instructores():
         
         if sin_espacios.isdigit():
             tamano_doc = funciones.calcular_tamaño(documento)
-            
-            if tamano_doc == 10:
+            if 6 <= tamano_doc <=10:
                 existe = False
                 for inst in lista_instructores:
                     if inst["documento"] == documento:
@@ -46,7 +45,7 @@ def creacion_instructores():
                 print(f"Documento válido: {documento}\n")
                 break
             else:
-                print(f"El documento solo contiene números, pero su longitud ({tamano_doc}) no es de 10 dígitos.")
+                print(f"El documento solo contiene números, pero su longitud ({tamano_doc}) no esta en el rango de 6 a 10 dígitos.")
                 print("Intente de nuevo.\n")
         else:
             print("El documento ingresado no es válido. No debe contener letras ni símbolos.")

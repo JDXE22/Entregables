@@ -32,8 +32,7 @@ def creacion_de_clientes():
         
         if sin_espacios.isdigit():
             tamano_doc = funciones.calcular_tamaño(documento)
-            #6 <= tamano_doc 10:
-            if tamano_doc == 10:
+            if  6 <= tamano_doc <= 10:
                 existe = False
                 for cliente in lista_clientes:
                     if cliente["documento"] == documento:
