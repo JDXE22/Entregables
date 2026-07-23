@@ -1,6 +1,3 @@
-Registro de Cliente Nuevo
-Nombre: JUAN ESPARZA
-Documento: 1005336311
-Curso: Moto
----------------------------------------
-
+ 
+{'nombre': 'JUAN ESPARZA', 'documento': '1005336311', 'curso': 'Moto'}
+{'nombre': 'JUAN ESPARZA', 'documento': '1005336345', 'curso': 'Moto'}

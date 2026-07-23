@@ -5,11 +5,10 @@ citas = funciones.leer_archivo_txt("citas")
 def verificar_cliente(cliente):
     clientes = funciones.leer_archivo_txt("clientes")
     for registro in clientes:
-        if (registro['cliente'] == cliente):
-            return True
-    else: 
-        return False
-    
+        if int(registro['documento']) == cliente:
+            return True 
+        else: 
+            return False
 
 def verificar_disponibilidad_instructor(instructor, fecha, hora):
     for cita in citas:
