@@ -22,12 +22,15 @@ def leer_archivo_txt(nombre_archivo):
       for linea in archivo: 
         linea = linea.strip()
         if linea:
-              registros.append(ast.literal_eval(linea))
-  except IOError:
-      print(f"Error al leer el archivo '{nombre_archivo}.txt'.")
-      return []
+          try:
+            registros.append(ast.literal_eval(linea))
+          except (ValueError, SyntaxError):
+            pass
   except FileNotFoundError:
       print(f"El archivo '{nombre_archivo}.txt' no existe aun.")
+      return []
+  except IOError:
+      print(f"Error al leer el archivo '{nombre_archivo}.txt'.")
       return []
   else:
    print(f"Se han leido {len(registros)} registros del archivo '{nombre_archivo}.txt'.")
