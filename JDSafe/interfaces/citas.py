@@ -1,6 +1,6 @@
 from datetime import datetime
 from helpers import funciones_txt as funciones
-citas = funciones.leer_archivo_txt("citas")
+citas = funciones.leer_archivo_txt("citas_clientes")
 
 def verificar_cliente(cliente):
     clientes = funciones.leer_archivo_txt("clientes")
