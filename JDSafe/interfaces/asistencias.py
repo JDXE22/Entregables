@@ -4,7 +4,7 @@ from helpers import funciones_txt as funciones
 def registrar_asistencia_y_observacion():
   while True:
     try:
-      cita = input("Ingrese el codigo de la cita \n")
+      cita = input("Ingrese el codigo de la cita: \n").strip()
       existe = funciones.leer_archivo_txt("asistencias")
       for asistencia in existe:
         if asistencia["codigo"] == cita:

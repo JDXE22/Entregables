@@ -14,7 +14,7 @@ while True:
         print("3. Registrar clientes")
         print("4. Registrar instructor")
         print("5. Registrar vehiculo")
-        print("6. Consultar citas agendadas")
+        print("6. Consultar citas agendadas por fecha [formato dd/mm/aa]")
         print("7. Consultar historial del cliente/vehiculos/instructor")
         print("Ingrese 0 para salir")
         opcion = int(input("Ingrese la opcion: \n"))    
