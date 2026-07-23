@@ -32,6 +32,6 @@ def verificar_especialidad_instructor(especialidad):
     instructores = funciones.leer_archivo_txt("instructores")
     for instructor in instructores:
         if instructor['especialidad'] ==  especialidad:
-            return False
-    return True 
+            return True
+    return False 
     
