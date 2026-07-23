@@ -1,18 +1,7 @@
 from datetime import datetime
 from helpers import funciones_txt as funciones
 from helpers import validaciones
-
-BLOQUES =[
-    {"hora": "08:00 - 09:00", "disponible": True, "estudiante": None},
-    {"hora": "09:00 - 10:00", "disponible": True, "estudiante": None},
-    {"hora": "10:00 - 11:00", "disponible": True, "estudiante": None},
-    {"hora": "11:00 - 12:00", "disponible": True, "estudiante": None},
-    {"hora": "12:00 - 13:00", "disponible": True, "estudiante": None},
-    {"hora": "13:00 - 14:00", "disponible": True, "estudiante": None},
-    {"hora": "14:00 - 15:00", "disponible": True, "estudiante": None},
-    {"hora": "15:00 - 16:00", "disponible": True, "estudiante": None},
-    {"hora": "16:00 - 17:00", "disponible": True, "estudiante": None},
-]
+from interfaces.horarios import mostrar_horarios_disponibles
 
 def agendar_cita():
     while True:
@@ -45,25 +34,10 @@ def agendar_cita():
                     fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                     fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
                     
-                    citas_existentes = funciones.leer_archivo_txt("citas_clientes")
-                    print(f"\n--- Horarios Disponibles (8:00 AM - 5:00 PM) para el {fecha_f} ---")
-                    for bloque in BLOQUES:
-                        hora_inicio = bloque["hora"].split(" - ")[0]
-                        ocupado = False
-                        estudiante_doc = None
-                        for c in citas_existentes:
-                            if c["fecha"] == fecha_f and c["hora"] == hora_inicio:
-                                ocupado = True
-                                estudiante_doc = c["cliente"]
-                                break
-                        
-                        estado = f"RESERVADO por el estudiante con numero de documento({estudiante_doc})" if ocupado else "LIBRE"
-                        print(f"  {bloque['hora']} --> [{estado}]")
+                    mostrar_horarios_disponibles(fecha_f)
                         
                     hora_insertada = input("\nIngrese en formato HH:MM la hora de la cita \n")
                     hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
-
-
 
                     if not validaciones.verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
                         print(f"El instructor {instructor} no está disponible en la fecha y hora seleccionadas.")
