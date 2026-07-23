@@ -76,6 +76,7 @@ def creacion_instructores():
         except ValueError as e:
             print(f"Entrada inválida. Debe ingresar un número entero: {e}\n")
 
+      
         nuevo_instructor = {
             "nombre": nombre,
             "documento": documento,
@@ -83,11 +84,10 @@ def creacion_instructores():
             "disponible": True 
         }
 
-        lista_instructores.append(nuevo_instructor)
-
         funciones.crear_archivo_txt("instructores", nuevo_instructor)
 
         print("\nLista actualizada de instructores:")
-        for instructor in lista_instructores:
+        lista_actualizada = funciones.leer_archivo_txt("instructores")
+        for instructor in lista_actualizada:
             print(f"Nombre: {instructor['nombre']}, Documento: {instructor['documento']}, Especialidad: {instructor['especialidad']}, Disponible: {instructor['disponible']}")
-            return
+        return
