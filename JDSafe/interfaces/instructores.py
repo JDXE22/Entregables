@@ -85,16 +85,7 @@ def creacion_instructores():
 
         lista_instructores.append(nuevo_instructor)
 
-        instructor_Nuevo = (
-            "Registro de Instructor Nuevo \n"
-            f"Nombre: {nombre} \n"
-            f"Documento: {documento} \n"
-            f"Especialidad: {sel} \n"
-            f"Disponibilidad: {nuevo_instructor['disponible']} \n"
-            "---------------------------------------\n"
-        )
-
-        funciones.crear_archivo_txt("instructores", instructor_Nuevo)
+        funciones.crear_archivo_txt("instructores", nuevo_instructor)
 
         print("\nLista actualizada de instructores:")
         for instructor in lista_instructores:
