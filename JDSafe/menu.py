@@ -3,6 +3,7 @@ from interfaces.vehiculos import agregar_vehiculo
 from interfaces.instructores import creacion_instructores
 from interfaces.clientes import creacion_de_clientes
 from interfaces.asistencias import consultar_asistencia_y_observacion
+from interfaces.horarios import mostrar_horarios_disponibles
 print("Bienvenido al programa JDSafe \n")
 print("A continuacion se va a desplegar un menu que funciona con numeros \n")
 print("Si ingresa una opcion incorrecta, el menu se desplegara otra vez\n")
@@ -16,6 +17,7 @@ while True:
         print("5. Registrar vehiculo")
         print("6. Consultar citas agendadas por fecha [formato dd/mm/aa]")
         print("7. Consultar historial del cliente/vehiculos/instructor")
+        print("8. Consultar horarios disponibles")
         print("Ingrese 0 para salir")
         opcion = int(input("Ingrese la opcion: \n"))    
         
@@ -39,6 +41,8 @@ while True:
                 consultar_citas_por_fecha()
         elif opcion == 7:
                 consultar_citas_por_cliente()
+        elif opcion == 8:
+                mostrar_horarios_disponibles()
         elif opcion == 0:
             print("Saliendo de el programa, vuelva pronto... \n")
             break
