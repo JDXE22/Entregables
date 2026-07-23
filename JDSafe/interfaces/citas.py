@@ -27,11 +27,16 @@ def agendar_cita():
                     else: 
                         print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
                         return
+
+                    if not validaciones.verificar_especialidad_instructor(instructor, vehiculo):
+                        print(f"El instructor {instructor} no tiene especialidad para enseñar a manejar {vehiculo}. Seleccione otro instructor.")
+                        continue
                     
                     fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
                     hora_insertada = input("Ingrese en formato HH:MM la hora de la cita \n")
                     fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
                     hora_f = datetime.strptime(hora_insertada, "%H:%M").strftime("%H:%M")
+
 
                     if not validaciones.verificar_disponibilidad_instructor(instructor, fecha_f, hora_f):
                         print(f"El instructor {instructor} no está disponible en la fecha y hora seleccionadas.")

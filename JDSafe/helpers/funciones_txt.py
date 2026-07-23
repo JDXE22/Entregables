@@ -13,7 +13,12 @@ def leer_archivo_txt(nombre_archivo):
       for linea in archivo: 
         linea = linea.strip()
         if linea:
-          registros.append(ast.literal_eval(linea))
+              registros.append(ast.literal_eval(linea))
+  except IOError:
+      print(f"Error al leer el archivo '{nombre_archivo}.txt'.")
+      return []
+
+            
   except FileNotFoundError:
       print(f"El archivo '{nombre_archivo}.txt' no existe aun.")
       return []
