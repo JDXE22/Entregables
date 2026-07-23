@@ -1,5 +1,6 @@
 from datetime import datetime
 from helpers import funciones_txt as funciones
+from helpers import validaciones
 
 BLOQUES = [
     {"hora": "08:00 - 09:00", "disponible": True, "estudiante": None},
@@ -13,27 +14,15 @@ BLOQUES = [
     {"hora": "16:00 - 17:00", "disponible": True, "estudiante": None},
 ]
 
-def mostrar_horarios_disponibles(fecha_f=None):
-  if fecha_f is None:
-      while True:
-          try:
-              fecha = input("Ingresar la fecha a consultar (formato DD/MM/YY): \n")
-              fecha_f = datetime.strptime(fecha, "%d/%m/%y").strftime("%d/%m/%y")
-              break
-          except ValueError:
-              print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")
+def mostrar_horarios_disponibles(fecha=None):
+    if fecha:
+        print(f"Mostrando horarios disponibles para la fecha: {fecha}")
+        horarios_filtrados = [bloque for bloque in BLOQUES if validaciones.verificar_disponibilidad_bloque(fecha, bloque)]
+    else:
+        print("Mostrando todos los horarios disponibles para el dia de hoy:")
+        horarios_filtrados = BLOQUES
 
-  citas_existentes = funciones.leer_archivo_txt("citas_clientes")
-  print(f"\n--- Horarios Disponibles (8:00 AM - 5:00 PM) para el {fecha_f} ---")
-  for i, bloque in enumerate(BLOQUES, start=1):
-      hora_inicio = bloque["hora"].split(" - ")[0]
-      ocupado = False
-      estudiante_doc = None
-      for c in citas_existentes:
-          if c["fecha"] == fecha_f and c["hora"] == hora_inicio:
-              ocupado = True
-              estudiante_doc = c["cliente"]
-              break
-      
-      estado = f"RESERVADO ({estudiante_doc})" if ocupado else "LIBRE"
-      print(f"  {i}. {bloque['hora']} --> [{estado}]")
+    for i, bloque in enumerate(horarios_filtrados, start=1):
+        print(f"{i}. {bloque['hora']}")
+
+    return horarios_filtrados
