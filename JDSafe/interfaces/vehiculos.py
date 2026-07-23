@@ -82,11 +82,10 @@ def agregar_vehiculo():
         "disponible": True
     }
 
-    lista_vehiculos.append(nuevo_vehiculo)
-
     funciones.crear_archivo_txt("vehiculos", nuevo_vehiculo)
 
     print("\nLista actualizada de vehículos:")
-    for vehiculo in lista_vehiculos:
+    lista_actualizada = funciones.leer_archivo_txt("vehiculos")
+    for vehiculo in lista_actualizada:
         print(f"Tipo: {vehiculo['tipo']}, Placa: {vehiculo['placa']}, Disponible: {vehiculo['disponible']}")
-        return
+    return
