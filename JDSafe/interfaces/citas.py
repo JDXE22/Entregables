@@ -56,20 +56,19 @@ def agendar_cita():
                                 print(f"Opcion invalida. Debe ser un numero entre 1 y {len(instructores_filtrados)}.\n")
                         except ValueError:
                             print("Entrada invalida. Por favor, ingrese un numero entero.\n")
-                            
                     while True:
                         try:
-                            fecha_insertada = input("Ingrese en formato DD/MM/YY la fecha de la cita \n")
-                            fecha_f = datetime.strptime(fecha_insertada, "%d/%m/%y").strftime("%d/%m/%y")
-                            fecha_actual = datetime.now().strftime("%d/%m/%y")
-                            
-                            if datetime.strptime(fecha_f, "%d/%m/%y" < datetime.strptime(fecha_actual), "%d/%m/%y"):
-                                print("La fecha ingresada ya ha pasado. Por favor, ingrese una fecha futura.\n")
+                            fecha_insertada = input("Ingrese la fecha de la cita (formato DD/MM/YY): \n")
+                            fecha_usuario_obj = datetime.strptime(fecha_insertada, "%d/%m/%y")
+                            fecha_actual_obj = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+                            if fecha_usuario_obj < fecha_actual_obj:
+                                print("La fecha ingresada es en el pasado. Por favor, ingrese una fecha válida (hoy o futura).\n")
                                 continue
+                            fecha_f = fecha_usuario_obj.strftime("%d/%m/%y")
                             break
                         except ValueError:
-                            print("El formato de la fecha ingresada no es valido. Por favor use el formato DD/MM/YY (ej. 24/07/26).\n")
-                    
+                            print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")                                
+                                           
                     mostrar_horarios_disponibles(fecha_f)
                     
                     while True:
