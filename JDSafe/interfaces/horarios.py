@@ -15,7 +15,7 @@ BLOQUES = [
 ]
 
 def mostrar_horarios_disponibles(fecha=None):
-    if fecha:
+    if fecha is not None:
         print(f"Mostrando horarios disponibles para la fecha: {fecha}")
         horarios_filtrados = [bloque for bloque in BLOQUES if validaciones.verificar_disponibilidad_bloque(fecha, bloque)]
     else:
@@ -25,4 +25,13 @@ def mostrar_horarios_disponibles(fecha=None):
     for i, bloque in enumerate(horarios_filtrados, start=1):
         print(f"{i}. {bloque['hora']}")
 
-    return horarios_filtrados
+    if fecha is None:
+        print("\nNota: Los horarios mostrados son para el día de hoy. Para ver horarios de otra fecha, ingrese la fecha deseada.")
+        fecha_input = input("Ingrese la fecha en formato DD/MM/YY para ver horarios disponibles (o presione Enter para continuar): ")
+        if fecha_input:
+                try:
+                        fecha_f = datetime.strptime(fecha_input, "%d/%m/%y").strftime("%d/%m/%y")
+                        mostrar_horarios_disponibles(fecha_f)
+                except ValueError:
+                        print("El formato de la fecha ingresada no es valido. Por favor use el formato DD/MM/YY (ej. 24/07/26).")
+                        
