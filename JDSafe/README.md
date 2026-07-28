@@ -43,24 +43,19 @@ El menú interactivo permite acceder a las siguientes operaciones, las cuales ha
 
 ```
 JDSafe/
-├── menu.py          # Script principal del programa (Menú e Integración)
-├── helpers/         # Funciones auxiliares y lógica del negocio
-│   ├── funciones_txt.py  # Lectura, escritura y cálculo de almacenamiento
-│   └── validaciones.py   # Validaciones de especialidades, colisiones y existencia
-├── interfaces/      # Interfaces de interacción por consola
+├── menu.py          # Script principal del programa
+├── README.md        # Documentación del proyecto
+├── helpers/         # Funciones auxiliares
+│   ├── funciones_txt.py
+│   ├── validaciones.py
+├── interfaces/      # Funcionalidades principales del sistema
 │   ├── asistencias.py
 │   ├── citas.py
 │   ├── clientes.py
 │   ├── horarios.py
 │   ├── instructores.py
-│   └── vehiculos.py
-└── data/            # Archivos de persistencia generados por el sistema
-    ├── README.md         # Documentación del proyecto
-    ├── clientes.txt      # Clientes registrados
-    ├── instructores.txt  # Instructores disponibles
-    ├── vehiculos.txt     # Vehículos registrados
-    ├── citas_clientes.txt# Citas agendadas
-    └── asistencias.txt   # Historial de observaciones y asistencias
+│   ├── vehiculos.py
+└── data/            # Archivos de datos generados por el sistema (citas, clientes, etc.)
 ```
 
 ## 💻 Requisitos e Instalación
