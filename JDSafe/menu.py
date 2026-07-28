@@ -46,7 +46,7 @@ while True:
         elif opcion == 7:
             consultar_citas_por_cliente()
         elif opcion == 8:
-            mostrar_horarios_disponibles()
+            mostrar_horarios_disponibles(interactivo=True)
         elif opcion == 0:
             print("\nSaliendo del programa, vuelva pronto... \n")
             break
