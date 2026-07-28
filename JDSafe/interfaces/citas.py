@@ -11,7 +11,7 @@ def agendar_cita():
             sin_espacios = cliente.replace(" ", "")
             if sin_espacios.isdigit():
                 tamaño = funciones.calcular_tamaño(cliente)
-                if tamaño == 10:
+                if 6 <= tamaño == 10:
                     cliente = int(cliente)
                     existe = validaciones.verificar_cliente(cliente)
                     if not existe:
@@ -130,7 +130,7 @@ def consultar_citas_por_cliente():
     while True:
         try:
             cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
-            if cliente.isdigit() and len(cliente) == 10:
+            if cliente.isdigit() and 6 <= len(cliente) == 10:
                 cliente = int(cliente)
                 encontradas = [cita for cita in citas if cita['cliente'] == cliente]
                 if encontradas:
