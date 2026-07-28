@@ -2,13 +2,25 @@ from datetime import datetime
 from helpers import funciones_txt as funciones
 
 def registrar_asistencia_y_observacion():
+    print("\n" + "="*50)
+    print("   REGISTRO DE ASISTENCIA Y OBSERVACIONES")
+    print("="*50)
+    citas = funciones.leer_archivo_txt("citas_clientes")
+    print("\n--- Citas Programadas ---")
+    if not citas:
+        print("No hay citas programadas en el sistema.")
+        print("-" * 50 + "\n")
+        return
+    else:
+        for c in citas:
+            print(f"  • Código: {c.get('codigo', 'N/A')} | Cliente (Doc): {c['cliente']} | Instructor: {c['instructor']} | Fecha: {c['fecha']} {c['hora']}")
+    print("-" * 50 + "\n")
     while True:
         try:
             codigo_txt = input("Ingrese el codigo de la cita (numero de 3 digitos): \n").strip()
             if codigo_txt.isdigit() and len(codigo_txt) == 3:
                 codigo = int(codigo_txt)
                 break
-            print("El dato ingresado no es valido. Por favor ingrese un numero de cita de 3 digitos.\n")
         except ValueError:
             print("El dato ingresado no es valido. Por favor ingrese un numero de cita de 3 digitos.\n")
 
@@ -29,10 +41,13 @@ def registrar_asistencia_y_observacion():
 
     asistencia = {"codigo": codigo, "fecha": fecha_str, "observacion": observacion}
     funciones.crear_archivo_txt("asistencias", contenido=asistencia)
-    print("Asistencia y observacion registrada correctamente")
-    print(f"Codigo de cita: {codigo}")
-    print(f"Fecha: {fecha_str}")
-    print(f"Observacion: {observacion}")
+    print("\n" + "="*50)
+    print("¡Asistencia y observación registrada correctamente!")
+    print("="*50)
+    print(f"  • Código de cita: {codigo}")
+    print(f"  • Fecha: {fecha_str}")
+    print(f"  • Observación: {observacion}")
+    print("="*50 + "\n")
 
 def consultar_asistencia_y_observacion():
     while True:
