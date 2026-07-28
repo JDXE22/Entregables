@@ -90,9 +90,6 @@ def agendar_cita():
                     if not validaciones.verificar_disponibilidad_vehiculo(vehiculo, fecha_f, hora_f):
                         print(f"El vehículo {vehiculo} no está disponible en la fecha y hora seleccionadas.")
                         continue
-                    if not validaciones.verificar_disponibilidad_cita(fecha_f, hora_f):
-                        print(f"Ya existe una cita programada en la fecha {fecha_f} y hora {hora_f}. Por favor, seleccione otra fecha y hora.")
-                        continue
 
                 else:
                     print("El documento debe tener exactamente 10 dígitos. Intente de nuevo.\n")
