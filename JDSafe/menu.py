@@ -50,3 +50,5 @@ while True:
         elif opcion == 0:
             print("\nSaliendo del programa, vuelva pronto... \n")
             break
+        else:
+            print("\nSe ha ingresado una opción no válida. Por favor ingrese un número del 1 al 8.\n")
