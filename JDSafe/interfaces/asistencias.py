@@ -4,8 +4,11 @@ from helpers import funciones_txt as funciones
 def registrar_asistencia_y_observacion():
     while True:
         try:
-            codigo = int(input("Ingrese el codigo de la cita (numero de 3 digitos): \n"))
-            break
+            codigo_txt = input("Ingrese el codigo de la cita (numero de 3 digitos): \n").strip()
+            if codigo_txt.isdigit() and len(codigo_txt) == 3:
+                codigo = int(codigo_txt)
+                break
+            print("El dato ingresado no es valido. Por favor ingrese un numero de cita de 3 digitos.\n")
         except ValueError:
             print("El dato ingresado no es valido. Por favor ingrese un numero de cita de 3 digitos.\n")
 
@@ -34,8 +37,11 @@ def registrar_asistencia_y_observacion():
 def consultar_asistencia_y_observacion():
     while True:
         try:
-            cita = int(input("Ingrese el codigo de la cita recuerde que es un numero de 3 digitos: \n"))
-            break
+            cita_txt = input("Ingrese el codigo de la cita recuerde que es un numero de 3 digitos: \n").strip()
+            if cita_txt.isdigit() and len(cita_txt) == 3:
+                cita = int(cita_txt)
+                break
+            print("El dato ingresado no es valido, por favor ingrese un numero de cita valido\n")
         except ValueError:
             print("El dato ingresado no es valido, por favor ingrese un numero de cita valido\n")
             continue
