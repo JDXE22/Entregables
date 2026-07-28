@@ -50,6 +50,21 @@ def registrar_asistencia_y_observacion():
     print("="*50 + "\n")
 
 def consultar_asistencia_y_observacion():
+
+    print("\n" + "="*50)
+    print("   CONSULTA DE ASISTENCIA Y OBSERVACIONES")
+    print("="*50)
+    citas = funciones.leer_archivo_txt("citas_clientes")
+    print("\n--- Citas Programadas ---")
+    if not citas:
+        print("No hay citas programadas en el sistema.")
+        print("-" * 50 + "\n")
+        return
+    else:
+        for c in citas:
+            print(f"  • Código: {c.get('codigo', 'N/A')} | Cliente (Doc): {c['cliente']} | Instructor: {c['instructor']} | Fecha: {c['fecha']} {c['hora']}")
+    print("-" * 50 + "\n")
+    
     while True:
         try:
             cita_txt = input("Ingrese el codigo de la cita recuerde que es un numero de 3 digitos: \n").strip()
