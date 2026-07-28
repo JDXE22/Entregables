@@ -167,12 +167,22 @@ def consultar_citas_por_fecha():
             fecha = input("Ingresar la fecha de la cita programada (formato DD/MM/YY): \n")
             fecha_f = datetime.strptime(fecha, "%d/%m/%y").strftime("%d/%m/%y")
             encontradas = [cita for cita in citas if cita['fecha'] == fecha_f]
+            print("\n" + "="*50)
+            print(f"Citas Agendadas para el {fecha_f}")
+            print("="*50)
             if encontradas:
                 print(f"Se han encontrado los siguientes resultados de la fecha: {fecha_f} \n")
-                for cita in encontradas:
-                    print(f"Codigo: {cita.get('codigo', 'N/A')}, Cliente: {cita['cliente']}, Instructor: {cita['instructor']}, Vehiculo: {cita['vehiculo']}, Hora: {cita['hora']} \n")
+                for i, cita in enumerate(encontradas, 1):
+                    print(f"  Cita #{i}:")
+                    print(f"    • Código: {cita.get('codigo', 'N/A')}")
+                    print(f"    • Cliente (Doc): {cita['cliente']}")
+                    print(f"    • Instructor: {cita['instructor']}")
+                    print(f"    • Vehículo: {cita['vehiculo']}")
+                    print(f"    • Hora: {cita['hora']} (Inicio)")
+                    print("    " + "-"*30)
             else:
-                print("No se encontraron citas para la fecha ingresada.\n")
+                print("No se encontraron citas para la fecha ingresada.")
+                print("="*50 + "\n")
             return
         except ValueError:
             print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")
