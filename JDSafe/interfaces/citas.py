@@ -37,12 +37,22 @@ def agendar_cita():
             return
         break
 
+    if not validaciones.verificar_existencia_vehiculo():
+        print("No hay vehículos registrados en el sistema. Por favor, registre al menos un vehículo antes de agendar una cita.")
+        return
+
     while True:
         vehiculo = input("Seleccione el tipo de vehiculo: 1. Moto 2. Carro \n")
         if vehiculo == "1":
+            if not validaciones.verificar_existencia_vehiculo("Moto"):
+                print("No hay vehículos de tipo Moto registrados en el sistema. Por favor, registre una Moto primero.\n")
+                continue
             vehiculo = "Moto"
             break
         elif vehiculo == "2": 
+            if not validaciones.verificar_existencia_vehiculo("Carro"):
+                print("No hay vehículos de tipo Carro registrados en el sistema. Por favor, registre un Carro primero.\n")
+                continue
             vehiculo = "Carro"
             break
         else: 
