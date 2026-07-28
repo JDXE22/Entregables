@@ -28,6 +28,14 @@ def verificar_disponibilidad_cita(fecha,hora):
             return False
     return True
 
+def verificar_disponibilidad_bloque(fecha, bloque):
+    hora_inicio = bloque["hora"].split(" - ")[0]
+    citas = funciones.leer_archivo_txt("citas_clientes")
+    for cita in citas:
+        if cita['fecha'] == fecha and cita['hora'] == hora_inicio:
+            return False
+    return True
+
 def verificar_especialidad_instructor(instructor_nombre, tipo_vehiculo):
     instructores = funciones.leer_archivo_txt("instructores")
     nombre_upper = instructor_nombre.strip().upper()
