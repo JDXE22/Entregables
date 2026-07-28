@@ -140,7 +140,7 @@ def consultar_citas_por_cliente():
 
     while True:
         try:
-            cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
+            cliente = input("Ingresar numero de documento de 6 a 10 digitos del cliente, sin comas o espacios. \n")
             tamano = funciones.calcular_tamaño(cliente)
             if cliente.isdigit() and 6 <= tamano <= 10:
                 cliente = int(cliente)
