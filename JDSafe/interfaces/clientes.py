@@ -27,7 +27,7 @@ def creacion_de_clientes():
             print("Intente de nuevo.\n")
 
     while True:
-        documento = input("Ingresar número de documento de 10 dígitos (sin espacios ni puntos): \n").strip()
+        documento = input("Ingresar número de documento 6 a 10 dígitos (sin espacios ni puntos): \n").strip()
         sin_espacios = documento.replace(" ", "")
         
         if sin_espacios.isdigit():
