@@ -19,7 +19,7 @@ def agendar_cita():
     print("-" * 50 + "\n")
 
     while True:
-        cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
+        cliente = input("Ingresar numero de documento de 6 a 10 digitos del cliente, sin comas o espacios. \n")
         sin_espacios = cliente.replace(" ", "")
         if not sin_espacios.isdigit():
             print("El documento ingresado no es válido. Debe contener solo números.\n")
