@@ -4,103 +4,87 @@
 
 ## 📋 Descripción General
 
-El script principal (`menu.py`) expone una interfaz de menú numérico robusta que guía al usuario a través de las diferentes operaciones del sistema. Cuenta con control de flujo continuo y manejo de excepciones para asegurar una experiencia de usuario estable ante entradas no válidas.
+El script principal (`menu.py`) expone una interfaz de menú numérico robusta que guía al usuario a través de las diferentes operaciones del sistema. Cuenta con control de flujo continuo, loops de validación específicos por sección para evitar reescritura de datos, y manejo de excepciones para asegurar una experiencia de usuario sumamente estable ante entradas no válidas o colisiones en la programación.
 
 ## 🚀 Funcionalidades Principales
 
-El menú interactivo permite acceder a las siguientes opciones:
+El menú interactivo permite acceder a las siguientes operaciones, las cuales han sido optimizadas para mejorar la experiencia de usuario (UX) y la consistencia de los datos:
 
-1. **Programar citas:** Programación y asignación de franjas horarias.
-2. **Asistencias y observaciones:** Registro y seguimiento del cumplimiento y bitácoras operativas.
-3. **Registrar clientes:** Módulo para dar de alta nuevos usuarios en el sistema.
-4. **Registrar instructor:** Registro del personal técnico o de instrucción.
-5. **Registrar vehículo:** Gestión y control de la flota vehicular asignada.
-6. **Consultar citas agendadas por fecha:** Vista general de los compromisos programados en una fecha específica.
-7. **Consultar historial del cliente:** Trazabilidad completa de las interacciones y registros de cada cliente.
-8. **Consultar horarios disponibles:** Visualización de horarios libres para agendar citas.
-0. **Salir del programa:** Finaliza de manera segura la ejecución del sistema.
+1. **Programar citas (Agendamiento Inteligente):**
+   - **Menús Numéricos e Indexados:** Se eliminó la digitación manual de horarios e instructores. Los instructores aptos y los bloques de horarios se seleccionan mediante un número de opción para evitar errores de tipeo.
+   - **Filtro Dinámico:** Al agendar, el sistema detecta la categoría de vehículo elegida (Moto o Carro) y lista únicamente a los instructores calificados con esa especialidad.
+   - **Validación de Fechas Futuras:** El sistema rechaza fechas en el pasado y notifica al usuario en sitio.
+   - **Loop de Reintento Específico:** En caso de que el instructor o el vehículo ya estén ocupados en la fecha/hora seleccionada, el flujo solo vuelve a solicitar la fecha y bloque de horario, sin forzar a reiniciar todo el formulario de inscripción del cliente.
+   - **Código Único de Cita:** Genera de forma automática un código de cita de 3 dígitos (del 100 al 999) garantizando la no duplicidad.
+
+2. **Asistencias y observaciones (Enlace de Registros):**
+   - El registro de asistencias busca y valida la cita programada mediante su código único de 3 dígitos.
+   - Si la cita existe, el sistema **autocompleta la fecha** directamente desde la base de datos de citas, eliminando la redundancia y solicitando únicamente la observación al instructor.
+   - Almacena el historial como cadena formateada (`str`) para mantener una persistencia compatible al 100% con los intérpretes de texto.
+
+3. **Registrar clientes:** Módulo para dar de alta nuevos usuarios con validación estricta de formato y longitud de documentos de identidad (6 a 10 dígitos) y nombres.
+4. **Registrar instructor:** Registro del personal docente verificando especialidades y disponibilidad.
+5. **Registrar vehículo:** Gestión del parque vehicular (Moto/Carro) validando formatos sintácticos de placa (Carro: `ABC123` / Moto: `ABC12D`).
+6. **Consultar citas agendadas por fecha:** Muestra el listado estructurado de citas de una fecha con su código, instructor, tipo de vehículo y hora.
+7. **Consultar historial del cliente:** Trazabilidad completa de las citas de un cliente mediante su documento.
+8. **Consultar horarios disponibles (Vista de Estado):** Presenta los 9 bloques del día con su indicador dinámico de disponibilidad: `[LIBRE]` u `[OCUPADO]`.
+9. **Salir del programa:** Cierre seguro y liberación de la ejecución.
 
 ## 🛠️ Tecnologías Utilizadas
 
-* **Python 3.x**
-* Módulos personalizados para funcionalidades específicas:
-  - `interfaces`: Contiene las funcionalidades principales del sistema (citas, clientes, instructores, vehículos, horarios, asistencias).
-  - `helpers`: Proporciona funciones auxiliares como manejo de archivos y validaciones.
-* Control de flujo iterativo (`while True`) para mantener el menú activo.
-* Estructuras condicionales anidadas (`if-elif-else`) para la lógica del menú.
-* Manejo de excepciones robusto (`try-except-else`) para capturar errores y prevenir fallos.
+- **Python 3.x**
+- Módulos personalizados para funcionalidades específicas:
+  - `interfaces`: Contiene las funcionalidades del sistema (citas, clientes, instructores, vehículos, horarios, asistencias).
+  - `helpers`: Proporciona funciones auxiliares como manejo de archivos (`funciones_txt.py`) y validaciones lógicas (`validaciones.py`).
+- Control de flujo secuencial y modular con loops independientes en pantallas clave.
+- Serialización segura y robusta a archivos de texto plano mediante `ast.literal_eval`.
 
 ## 📂 Estructura del Proyecto
 
 ```
 JDSafe/
-├── menu.py          # Script principal del programa
-├── README.md        # Documentación del proyecto
-├── helpers/         # Funciones auxiliares
-│   ├── funciones_txt.py
-│   ├── validaciones.py
-├── interfaces/      # Funcionalidades principales del sistema
+├── menu.py          # Script principal del programa (Menú e Integración)
+├── helpers/         # Funciones auxiliares y lógica del negocio
+│   ├── funciones_txt.py  # Lectura, escritura y cálculo de almacenamiento
+│   └── validaciones.py   # Validaciones de especialidades, colisiones y existencia
+├── interfaces/      # Interfaces de interacción por consola
 │   ├── asistencias.py
 │   ├── citas.py
 │   ├── clientes.py
 │   ├── horarios.py
 │   ├── instructores.py
-│   ├── vehiculos.py
-└── data/            # Archivos de datos generados por el sistema (citas, clientes, etc.)
+│   └── vehiculos.py
+└── data/            # Archivos de persistencia generados por el sistema
+    ├── README.md         # Documentación del proyecto
+    ├── clientes.txt      # Clientes registrados
+    ├── instructores.txt  # Instructores disponibles
+    ├── vehiculos.txt     # Vehículos registrados
+    ├── citas_clientes.txt# Citas agendadas
+    └── asistencias.txt   # Historial de observaciones y asistencias
 ```
 
 ## 💻 Requisitos e Instalación
 
-Para ejecutar este script, solo necesitas tener instalado Python en tu entorno local.
+Para ejecutar este programa localmente:
 
-1. Clona este repositorio o descarga el archivo fuente.
-2. Asegúrate de que la carpeta `data/` exista en el directorio raíz del proyecto. Si no existe, créala manualmente.
-3. Abre una terminal en la ruta del archivo.
-4. Ejecuta el siguiente comando:
+1. Asegúrate de tener instalado Python en tu entorno.
+2. Abre una terminal en la raíz del proyecto.
+3. Ejecuta el archivo principal:
 
 ```bash
-python3 menu.py
+python menu.py
 ```
 
-Si el comando anterior no funciona debido a problemas de configuración del entorno, prueba con:
+o
 
 ```bash
 python3 -m menu
 ```
 
-> **Nota:** Asegúrate de que el archivo `menu.py` esté en el directorio raíz del proyecto o en el `PYTHONPATH`.
+## 🛡️ Manejo de Errores y Robustez
 
-## 🛡️ Manejo de Errores
+El sistema implementa validaciones estrictas y capturas de excepciones en cada pantalla:
 
-El sistema implementa bloques `try-except` para capturar y manejar errores de manera eficiente:
-
-* **`ValueError`**: Maneja entradas no válidas, como caracteres en lugar de números.
-* **`TypeError`**: Previene fallos cuando se ingresan tipos de datos incompatibles.
-* **`Exception`**: Captura genérica de cualquier error inesperado para evitar cierres abruptos del programa. El mensaje de error correspondiente se imprime en la consola para facilitar la depuración.
-
-> **Nota:** Se recomienda revisar los mensajes de error en la consola para identificar posibles problemas en la ejecución.
-
-## 📜 Detalles Adicionales
-
-### Módulos Personalizados
-
-1. **`helpers/funciones_txt.py`**: Maneja la lectura, escritura y actualización de archivos de texto utilizados como base de datos.
-2. **`helpers/validaciones.py`**: Contiene funciones para validar la disponibilidad de instructores, vehículos y citas.
-3. **`interfaces/`**: Contiene las funcionalidades principales del sistema:
-   - `citas.py`: Permite agendar y consultar citas.
-   - `clientes.py`: Maneja el registro de clientes.
-   - `instructores.py`: Maneja el registro de instructores.
-   - `vehiculos.py`: Permite registrar vehículos.
-   - `horarios.py`: Muestra horarios disponibles.
-   - `asistencias.py`: Registra y consulta asistencias y observaciones.
-
-### Archivos de Datos
-
-Los datos generados por el sistema se almacenan en archivos de texto dentro de la carpeta `data/`. Estos archivos incluyen:
-- `clientes.txt`: Información de los clientes registrados.
-- `instructores.txt`: Información de los instructores registrados.
-- `vehiculos.txt`: Información de los vehículos registrados.
-- `citas_clientes.txt`: Información de las citas programadas.
-- `asistencias.txt`: Registro de asistencias y observaciones.
-
-¡Gracias por usar **JDSafe**! Si tienes alguna pregunta o sugerencia, no dudes en contactarnos.
+- **`ValueError`**: Captura caracteres no válidos donde se esperan enteros (menús, bloque de horarios, documentos).
+- **`AttributeError` / `TypeError`**: Prevención de fallos durante la manipulación de arreglos y diccionarios cargados desde los archivos.
+- **Control de Duplicidades**: Verificación en tiempo real leyendo directamente del almacenamiento físico en cada registro para evitar registros idénticos simultáneos.
