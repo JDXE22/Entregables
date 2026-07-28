@@ -5,6 +5,19 @@ from helpers import validaciones
 from interfaces.horarios import mostrar_horarios_disponibles, BLOQUES
 
 def agendar_cita():
+    print("\n" + "="*50)
+    print("      SISTEMA DE AGENDAMIENTO DE CITAS")
+    print("="*50)
+    
+    print("\n--- Clientes Registrados ---")
+    lista_clientes = funciones.leer_archivo_txt("clientes")
+    if not lista_clientes:
+        print("  [AVISO] No hay clientes registrados en el sistema.")
+    else:
+        for c in lista_clientes:
+            print(f"  • Nombre: {c['nombre']} | Documento: {c['documento']} | Curso: {c['curso']}")
+    print("-" * 50 + "\n")
+
     while True:
         try:
             cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
@@ -28,7 +41,8 @@ def agendar_cita():
                             break
                         else: 
                             print("Opcion de vehiculo no valida, por favor ingrese una opcion valida")
-
+                            
+                    print(f"\nBuscando instructores disponibles para la especialidad: {vehiculo}...\n")
                     instructores_registrados = funciones.leer_archivo_txt("instructores")
                     instructores_filtrados = []
                     for inst in instructores_registrados:
@@ -67,7 +81,7 @@ def agendar_cita():
                             fecha_f = fecha_usuario_obj.strftime("%d/%m/%y")
                             break
                         except ValueError:
-                            print("El formato de la fecha ingresada no es valido, por favor ingrese la fecha en el formato DD/MM/YY \n")                                
+                            print("\nEl formato de la fecha ingresada no es válido. Debe ser DD/MM/YY (ej. 30/07/26).\n")                               
                                            
                     mostrar_horarios_disponibles(fecha_f)
                     
@@ -92,7 +106,7 @@ def agendar_cita():
                         continue
 
                 else:
-                    print("El documento debe tener exactamente 10 dígitos. Intente de nuevo.\n")
+                    print("\n El documento debe tener entre 6 y 10 dígitos. Intente de nuevo.\n")
                     continue
             else:
                 print("El documento ingresado no es válido. Debe contener solo números.\n")
@@ -127,7 +141,8 @@ def consultar_citas_por_cliente():
     while True:
         try:
             cliente = input("Ingresar numero de documento de 10 digitos del cliente, sin comas o espacios. \n")
-            if cliente.isdigit() and 6 <= len(cliente) <= 10:
+            tamano = funciones.calcular_tamaño(cliente)
+            if cliente.isdigit() and 6 <= tamano <= 10:
                 cliente = int(cliente)
                 encontradas = [cita for cita in citas if cita['cliente'] == cliente]
                 if encontradas:
