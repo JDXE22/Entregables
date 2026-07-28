@@ -21,11 +21,13 @@ def verificar_disponibilidad_vehiculo(vehiculo, fecha, hora):
             return False
     return True
 
-def verificar_disponibilidad_cita(fecha,hora):
+def verificar_disponibilidad_bloque(fecha, bloque, tipo_vehiculo=None):
+    hora_inicio = bloque["hora"].split(" - ")[0]
     citas = funciones.leer_archivo_txt("citas_clientes")
     for cita in citas:
-        if cita['fecha'] == fecha and cita['hora'] == hora:
-            return False
+        if cita['fecha'] == fecha and cita['hora'] == hora_inicio:
+            if tipo_vehiculo is None or cita['vehiculo'] == tipo_vehiculo:
+                return False
     return True
 
 def verificar_especialidad_instructor(instructor_nombre, tipo_vehiculo):

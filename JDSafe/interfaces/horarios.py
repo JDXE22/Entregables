@@ -14,26 +14,28 @@ BLOQUES = [
     {"hora": "16:00 - 17:00", "disponible": True, "estudiante": None},
 ]
 
-def mostrar_horarios_disponibles(fecha=None):
-    while True:
-        try:
-            if fecha is not None:
-                    print(f"Mostrando horarios disponibles para la fecha: {fecha}")
-                    horarios_filtrados = [bloque for bloque in BLOQUES if validaciones.verificar_disponibilidad_bloque(fecha, bloque)]
-            else:
-                    print("Mostrando todos los horarios disponibles para el dia de hoy:")
-                    horarios_filtrados = BLOQUES
+def mostrar_horarios_disponibles(fecha=None, interactivo=False):
+    if fecha is None:
+        fecha = datetime.now().strftime("%d/%m/%y")
+        print(f"\n--- Horarios Disponibles (8:00 AM - 5:00 PM) para el {fecha} ---")
+    else:
+        print(f"\n--- Horarios Disponibles (8:00 AM - 5:00 PM) para el {fecha} ---")
 
-            for i, bloque in enumerate(horarios_filtrados, start=1):
-                    print(f"{i}. {bloque['hora']}")
+    for i, bloque in enumerate(BLOQUES, start=1):
+        disponible = validaciones.verificar_disponibilidad_bloque(fecha, bloque)
+        estado = "[LIBRE]" if disponible else "[OCUPADO]"
+        print(f"  {i}. {bloque['hora']} --> {estado}")
 
-            if fecha is None:
-                print("\nNota: Los horarios mostrados son para el día de hoy. Para ver horarios de otra fecha, ingrese la fecha deseada.")
-                fecha_input = input("Ingrese la fecha en formato DD/MM/YY para ver horarios disponibles (o presione Enter para continuar): ")
-                if fecha_input:
-                    fecha_f = datetime.strptime(fecha_input, "%d/%m/%y").strftime("%d/%m/%y")
-                    mostrar_horarios_disponibles(fecha_f)
+    if interactivo:
+        while True:
+            try:
+                fecha_input = input("\n¿Desea consultar otra fecha? Ingrese una fecha (DD/MM/YY) o presione Enter para salir: ").strip()
+                if not fecha_input:
+                    break
+                fecha_f = datetime.strptime(fecha_input, "%d/%m/%y").strftime("%d/%m/%y")
+                mostrar_horarios_disponibles(fecha_f, interactivo=True)
+                break
+            except ValueError:
+                print("La fecha insertada no es valida. Por favor use el formato DD/MM/YY (ej. 27/07/26).\n")
 
-        except ValueError:
-            print("El formato de la fecha ingresada no es valido. Por favor use el formato DD/MM/YY (ej. 24/07/26).")
-                        
+    return BLOQUES
