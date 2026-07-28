@@ -14,11 +14,26 @@ def verificar_disponibilidad_instructor(instructor, fecha, hora):
             return False
     return True
 
+def verificar_existencia_vehiculo(tipo_vehiculo=None):
+    vehiculos = funciones.leer_archivo_txt("vehiculos")
+    if not vehiculos:
+        return False
+    if tipo_vehiculo:
+        return any(v.get("tipo") == tipo_vehiculo for v in vehiculos)
+    return True
+
 def verificar_disponibilidad_vehiculo(vehiculo, fecha, hora):
+    vehiculos = funciones.leer_archivo_txt("vehiculos")
     citas = funciones.leer_archivo_txt("citas_clientes")
-    for cita in citas:
-        if cita['vehiculo'] == vehiculo and cita['fecha'] == fecha and cita['hora'] == hora:
-            return False
+    
+    total_flota = sum(1 for v in vehiculos if v.get("tipo") == vehiculo)
+    if total_flota == 0:
+        return False
+
+    citas_ocupadas = sum(1 for cita in citas if cita.get('vehiculo') == vehiculo and cita.get('fecha') == fecha and cita.get('hora') == hora)
+    
+    if citas_ocupadas >= total_flota:
+        return False
     return True
 
 def verificar_disponibilidad_bloque(fecha, bloque, tipo_vehiculo=None):
