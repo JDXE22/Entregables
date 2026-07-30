@@ -1,0 +1,14 @@
+[
+  {
+    "estudiante": "JUANESPARZA",
+    "instructor": "DUBANCAMILO",
+    "fecha_evaluacion": "2026/08/21",
+    "calificacion": 100
+  },
+  {
+    "estudiante": "JUANESPARZA",
+    "instructor": "DUBANESTIVEN",
+    "fecha_evaluacion": "2026/08/29",
+    "calificacion": 100
+  }
+]

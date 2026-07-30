@@ -11,10 +11,21 @@ def obtener_ruta_archivo(nombre_archivo):
     return os.path.join(DATA_DIR, f"{nombre_archivo}.json")
 
 def crear_archivo(nombre_archivo, contenido):
-  ruta = obtener_ruta_archivo(nombre_archivo)
-  with open(ruta, "a+", encoding="utf-8") as archivo:
-    json.dump(contenido, archivo, indent=2)
-  print(f"¡El archivo '{nombre_archivo}.json' ha sido creado/actualizado con éxito! \n")
+    ruta = obtener_ruta_archivo(nombre_archivo)
+    if os.path.exists(ruta):
+      with open(ruta, "r", encoding="utf-8") as archivo:
+          try:
+            datos_existentes = json.load(archivo)
+            if not isinstance(datos_existentes, list):
+                datos_existentes = []
+          except json.JSONDecodeError:
+                datos_existentes = []
+    else:
+        datos_existentes = []
+    datos_existentes.append(contenido)
+    with open(ruta, "w", encoding="utf-8") as archivo:
+        json.dump(datos_existentes, archivo, indent=2)
+    print(f"¡El archivo '{nombre_archivo}.json' ha sido creado/actualizado con éxito! \n")
 
 def leer_archivo(nombre_archivo):
     ruta = obtener_ruta_archivo(nombre_archivo)
