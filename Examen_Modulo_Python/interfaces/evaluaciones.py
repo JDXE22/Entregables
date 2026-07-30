@@ -108,16 +108,17 @@ def consulta_estudiante():
     while True:
         try:
             nombre_cliente = input("Ingrese el primer nombre y apellido del cliente").strip().replace(" ", "")
+            print(nombre_cliente)
             if nombre_cliente.isalpha():
                 tamano = funciones.calcular_tamaño(nombre_cliente)
                 if 6 <= tamano <= 50:
                     nombre_cliente = nombre_cliente.upper() 
                     print(f"Nombre válido. Bienvenido/a, {nombre_cliente}\n")
-                    encontradas = [cliente for cliente in evaluaciones if cliente['cliente'] == nombre_cliente]
+                    encontradas = [cliente for cliente in evaluaciones if cliente['estudiante'] == nombre_cliente]
                     if encontradas:
                         print(f"Se han encontrado los siguientes resultados del cliente: {nombre_cliente}")
                         for cliente in encontradas:
-                            print(f"Nombre del cliente: {cliente['cliente']}, Nombre del instructor: {cliente['instructor']}, Fecha de la evaluacion: {cliente['fecha_evaluacion']}, Calificacion: {cliente['calificacion']}")
+                            print(f"Nombre del cliente: {cliente['estudiante']}, Nombre del instructor: {cliente['instructor']}, Fecha de la evaluacion: {cliente['fecha_evaluacion']}, Calificacion: {cliente['calificacion']}")
                     else:
                         print("No se encontraron citas para el cliente ingresado.\n")
                         return
