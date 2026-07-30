@@ -139,5 +139,41 @@ def consulta_estudiante():
             print("Intente de nuevo.\n")
             continue
 
+def promedio_general_estudiante():
+    evaluaciones = funciones.leer_archivo("evaluaciones")
+    while True:
+        try:
+            nombre_cliente = input("Ingrese el primer nombre y apellido del cliente \n").strip().replace(" ", "")
+            print(nombre_cliente)
+            if nombre_cliente.isalpha():
+                tamano = funciones.calcular_tamaño(nombre_cliente)
+                if 6 <= tamano <= 50:
+                    nombre_cliente = nombre_cliente.upper() 
+                    print(f"Nombre válido. Bienvenido/a, {nombre_cliente}\n")
+                    encontradas = [cliente for cliente in evaluaciones if cliente['estudiante'] == nombre_cliente]
+                    if encontradas:
+                        print(f"Se han encontrado los siguientes resultados de las evaluaciones del cliente: {nombre_cliente}")
+                        for cliente in encontradas:
+                            notas = sum(cliente['calificacion'] for cliente in encontradas)
+                            print(f"El promedio de las notas del estudiante {nombre_cliente} es {notas/len(encontradas)}")
+                    else:
+                        print("No se encontraron notas para el cliente ingresado.\n")
+                        return
+                else:
+                    print(f"El nombre solo contiene letras, pero su longitud ({tamano}) debe estar entre 6 y 50 caracteres.")
+                    print("Intente de nuevo.\n")
+            else:
+                print("El nombre ingresado no es válido. No debe contener números ni símbolos.")
+                print("Intente de nuevo.\n")
+
+        except ValueError:
+            print("El nombre ingresado no es válido. Debe contener solo letras.")
+            print("Intente de nuevo.\n")
+            continue
+            
+        except Exception as e:
+            print(f"Se ha producido un error inesperado: {e}")
+            print("Intente de nuevo.\n")
+            continue
 
 

@@ -1,4 +1,4 @@
-from interfaces.evaluaciones import registrar_evaluacion, consulta_estudiante
+from interfaces.evaluaciones import registrar_evaluacion, consulta_estudiante, promedio_general_estudiante
 print("\nBienvenido al programa DriveSafe \n")
 print("A continuación se va a desplegar un menú que funciona con números. \n")
 print("Si ingresa una opción incorrecta, el menú se desplegará otra vez.\n")
@@ -28,7 +28,7 @@ while True:
         elif opcion == 2:
             consulta_estudiante()
         elif opcion == 3:
-            print("Calculando de promedio general")
+            promedio_general_estudiante()
         elif opcion == 0:
             print("\nSaliendo del programa, vuelva pronto... \n")
             break
