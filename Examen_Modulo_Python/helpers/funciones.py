@@ -1,6 +1,7 @@
 from io import open
 import ast
 import os
+import json
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DATA_DIR = os.path.abspath(os.path.join(BASE_DIR, "..", "data"))
@@ -12,7 +13,7 @@ def obtener_ruta_archivo(nombre_archivo):
 def crear_archivo(nombre_archivo, contenido):
   ruta = obtener_ruta_archivo(nombre_archivo)
   with open(ruta, "a+", encoding="utf-8") as archivo:
-    archivo.write(str(contenido) + "\n")
+    json.dump(contenido, archivo, indent=2)
   print(f"¡El archivo '{nombre_archivo}.json' ha sido creado/actualizado con éxito! \n")
 
 def leer_archivo(nombre_archivo):
