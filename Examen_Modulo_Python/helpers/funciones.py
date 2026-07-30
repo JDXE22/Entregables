@@ -35,3 +35,8 @@ def leer_archivo(nombre_archivo):
   else:
     print(f"Se han leído {len(registros)} registros del archivo '{nombre_archivo}.json'.")
   return registros
+
+def calcular_tamaño(name):
+  sin_espacios = name.replace(" ", "")
+  tamaño = len(sin_espacios)
+  return tamaño
