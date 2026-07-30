@@ -8,7 +8,7 @@ def registrar_evaluacion():
             print("Bienvenido al sistema de registro de evaluaciones de prácticas de manejo.\n")
             print("Por favor, ingrese los datos del cliente y la evaluación de la práctica.\n") 
 
-            nombre_cliente = input("Ingrese el primer nombre y apellido del cliente").strip().replace(" ", "")
+            nombre_cliente = input("Ingrese el primer nombre y apellido del cliente \n").strip().replace(" ", "")
             if nombre_cliente.isalpha():
                 tamano = funciones.calcular_tamaño(nombre_cliente)
                 if 6 <= tamano <= 50:
@@ -35,7 +35,7 @@ def registrar_evaluacion():
     
     while True:
         try:
-            nombre_instructor = input("Ingrese el primer nombre y apellido del instructor").strip().replace(" ", "")
+            nombre_instructor = input("Ingrese el primer nombre y apellido del instructor \n").strip().replace(" ", "")
             if nombre_instructor.isalpha():
                 tamano = funciones.calcular_tamaño(nombre_instructor)
                 if 6 <= tamano <= 50:
@@ -99,7 +99,7 @@ def registrar_evaluacion():
     }
 
     funciones.crear_archivo("evaluaciones", nueva_entrada)
-    print("La evaluacion ha sido creada exitosamente")
+    print("La evaluacion ha sido creada exitosamente \n")
 
 def consulta_estudiante():
     evaluaciones = funciones.leer_archivo("evaluaciones")
@@ -107,7 +107,7 @@ def consulta_estudiante():
     print("Ingrese el nombre del cliente para consultar sus evaluaciones")
     while True:
         try:
-            nombre_cliente = input("Ingrese el primer nombre y apellido del cliente").strip().replace(" ", "")
+            nombre_cliente = input("Ingrese el primer nombre y apellido del cliente \n").strip().replace(" ", "")
             print(nombre_cliente)
             if nombre_cliente.isalpha():
                 tamano = funciones.calcular_tamaño(nombre_cliente)
