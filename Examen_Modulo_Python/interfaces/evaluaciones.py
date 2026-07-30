@@ -101,8 +101,6 @@ def registrar_evaluacion():
     funciones.crear_archivo("evaluaciones", nueva_entrada)
     print("La evaluacion ha sido creada exitosamente")
 
-registrar_evaluacion()
-
 
 
 
