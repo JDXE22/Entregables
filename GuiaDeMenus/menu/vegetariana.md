@@ -6,3 +6,8 @@ La cocina vegeariana es famosa por sus sabores frescos y basados en verduras, ba
 ## Platos Principales
 - **Pizza Vegetariana**: Masa fina cubierta con tomate, mozzarella, albahaca y aceitunas.
 - **Hamburguesa Vegetariana**: Hamburguesa con pan, carne a base de lentejas, tomate y cebolla.
+
+## Bebidas Recomendadas
+- Jugo de naranja.
+- Agua con gas.
+- Limoncello como digestivo.
