@@ -8,3 +8,8 @@ La cocina japonesa es famosa por sus sabores orientales e intensos, basados en i
 - **Arroz chino**: Arroz blanco con salsa de Soya, chop-suey de verduras con salsa teriyaki y cerdo apanado.
 - **Pastas chinas**: Espaguetis en salsa de ostras, pollo, res y verduras salteadas.
 - **Lumpias**: Masa de harina de trigo frita rellena de verdura y res.
+
+## Bebidas Recomendadas
+- Sake (bebida hecha a base de arroz).
+- Agua con gas y pepino.
+- Gingeralle.
