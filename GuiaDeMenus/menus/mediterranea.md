@@ -7,3 +7,8 @@ La cocina mediterranea es famosa por sus sabores frescos y maritimos, basados en
 - **Paella**: Arroz con especies acompañado de pescado, almejas, cangrejo.
 - **Pasta de Mar**: Espaguetis en salsa de Ostras, anillos de calamar.
 - **Ceviche**: Camaron crudo con tomate, limon y galleta de sal.
+
+## Bebidas Recomendadas
+- Limonada de coco.
+- Agua con gas.
+- Limoncello como digestivo.
