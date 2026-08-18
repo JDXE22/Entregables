@@ -8,3 +8,7 @@ La cocina mexicana es famosa por sus sabores intensos y picantes, basados en ing
 - **Quesadilla**: Tortilla de harina de maiz con queso, carne y cerdo mechado.
 - **Chimichangas**: Tortilla de harina de maiz rellena de queso, res, maiz, arroz y guacamole dipeada en aceite.
 ​
+## Bebidas Recomendadas
+- Agua de Jamaica.
+- Yagult.
+- Tequila.
