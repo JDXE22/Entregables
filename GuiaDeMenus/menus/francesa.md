@@ -13,3 +13,7 @@ La cocina francesa es famosa por sus sabores frescos y auténticos, basados en i
 - Vino.
 - Agua con gas.
 - Naranja como digestivo.
+
+## Consejos
+- Usa ingredientes frescos para mejores resultados.
+- Acompaña con pan con ajo para una experiencia completa.
