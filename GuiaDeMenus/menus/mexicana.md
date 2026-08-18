@@ -12,3 +12,7 @@ La cocina mexicana es famosa por sus sabores intensos y picantes, basados en ing
 - Agua de Jamaica.
 - Yagult.
 - Tequila.
+
+## Consejos
+- Usa ingredientes frescos para mejores resultados.
+- No exceder el picante por encima del sabor.
