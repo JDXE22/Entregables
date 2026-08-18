@@ -5,7 +5,7 @@ Los postres son famosos por sus sabores frescos y dulces, basados en ingrediente
 
 ## Platos Principales
 - **Red Velvet**: Masa roja con queso crema
-- **Genovesa**: Torta 3 leches
+- **Genovesa**: Torta 3 leches. 
 
-
-​
+​## Bebidas Recomendadas
+- Agua con gas.
