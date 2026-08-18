@@ -11,3 +11,7 @@ La cocina vegeariana es famosa por sus sabores frescos y basados en verduras, ba
 - Jugo de naranja.
 - Agua con gas.
 - Limoncello como digestivo.
+
+## Consejos
+- Usa ingredientes frescos para mejores resultados.
+- Acompaña con pan artesanal para una experiencia completa.
