@@ -13,3 +13,7 @@ La cocina japonesa es famosa por sus sabores orientales e intensos, basados en i
 - Sake (bebida hecha a base de arroz).
 - Agua con gas y pepino.
 - Gingeralle.
+
+## Consejos
+- Usa ingredientes frescos para mejores resultados, tambien procurar usar pescado fresco.
+- Acompaña con tofu.
