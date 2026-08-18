@@ -11,3 +11,7 @@ La cocina india es famosa por sus sabores exoticos y originales, basados en ingr
 ## Bebidas Recomendadas
 - Coca-cola.
 - Agua con gas.
+​
+## Consejos
+- Usa ingredientes frescos para mejores resultados.
+- Acompaña con tortilla para una experiencia completa.
